@@ -1,0 +1,10 @@
+{
+  "name": "Desi Ipsum",
+  "id": "1044224847363783091",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": [
+    "figma"
+  ],
+  "ui": "ui.html"
+}
