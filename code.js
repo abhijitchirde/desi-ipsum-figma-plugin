@@ -38,6 +38,7 @@ figma.ui.onmessage = msg => {
     const languageInput = msg.data.languageInput;
     //Hi, Mr, Sa, Kn, Ta, Te, Ba, Gu, Ma works with 'Hind' font // Od works with 'Baloo Bhaina 2'  //'Nirmala UI' works for all
     if (msg.type === 'get-desi-ipsum') {
+        let tempCounter = 0;
         for (const node of figma.currentPage.selection) {
             //This error test is working
             if (node.type !== 'TEXT') {
@@ -73,11 +74,13 @@ figma.ui.onmessage = msg => {
                 }
                 else {
                     node.characters = generateParagraphs(wordSpace[`${languageInput}`], input, languageInput);
-                    if (msg.data.checkBox === true) {
-                        figma.closePlugin(`Generated ${input} ${typeInput} of ${languageInput}.`);
-                    }
                 }
+                tempCounter++;
+                console.log(tempCounter);
             }
+        }
+        if ((msg.data.checkBox === true) && (tempCounter === figma.currentPage.selection.length)) {
+            figma.closePlugin(`Generated ${input} ${typeInput} of ${languageInput}.`);
         }
     }
     // if(msg.type === 'cancel'){
