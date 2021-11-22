@@ -27,7 +27,7 @@ const wordSpace = {
 const punctSetOne = [".", "?", "!", ","]; //Marathi, Kannada, Tamil, Gujarati, Telugu, Malayalam
 const punctSetTwo = ["|", "?", "!", ","]; //Hindi, Bangla, Odia, Punjabi
 const punctSetThree = ["||", "|"]; //Sanskrit
-figma.showUI(__html__, { width: 450, height: 290 });
+figma.showUI(__html__, { width: 470, height: 290 });
 // //need to work on this
 // if((figma.currentPage.selection.length === 0) || (figma.currentPage.selection[0].type !== "TEXT")) {
 //     noTextError();
