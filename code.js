@@ -27,11 +27,11 @@ const wordSpace = {
 const punctSetOne = [".", "?", "!", ","]; //Marathi, Kannada, Tamil, Gujarati, Telugu, Malayalam
 const punctSetTwo = ["|", "?", "!", ","]; //Hindi, Bangla, Odia, Punjabi
 const punctSetThree = ["||", "|"]; //Sanskrit
-figma.showUI(__html__, { width: 470, height: 320 });
-//need to work on this
-if ((figma.currentPage.selection.length === 0) || (figma.currentPage.selection[0].type !== "TEXT")) {
-    noTextError();
-}
+figma.showUI(__html__, { width: 450, height: 290 });
+// //need to work on this
+// if((figma.currentPage.selection.length === 0) || (figma.currentPage.selection[0].type !== "TEXT")) {
+//     noTextError();
+// }
 figma.ui.onmessage = msg => {
     const input = parseInt(msg.data.inputValue, 10);
     const typeInput = msg.data.typeInput;
@@ -39,6 +39,10 @@ figma.ui.onmessage = msg => {
     //Hi, Mr, Sa, Kn, Ta, Te, Ba, Gu, Ma works with 'Hind' font // Od works with 'Baloo Bhaina 2'  //'Nirmala UI' works for all
     if (msg.type === 'get-desi-ipsum') {
         let tempCounter = 0;
+        if (figma.currentPage.selection.length === 0) {
+            const nodeTypeError = "Please select a text layer";
+            figma.ui.postMessage({ error: "noTextLayer", message: { nodeTypeError } }); //added error message if node is not text
+        }
         for (const node of figma.currentPage.selection) {
             //This error test is working
             if (node.type !== 'TEXT') {
@@ -55,6 +59,7 @@ figma.ui.onmessage = msg => {
             }
             else if (node.type === 'TEXT') {
                 figma.ui.postMessage({ error: "TextLayer" });
+                // tempCounter += 1;
                 node.fontName = {
                     family: 'Nirmala UI',
                     style: 'Regular'
@@ -75,23 +80,23 @@ figma.ui.onmessage = msg => {
                 else {
                     node.characters = generateParagraphs(wordSpace[`${languageInput}`], input, languageInput);
                 }
-                tempCounter++;
-                console.log(tempCounter);
             }
         }
-        if ((msg.data.checkBox === true) && (tempCounter === figma.currentPage.selection.length)) {
-            figma.closePlugin(`Generated ${input} ${typeInput} of ${languageInput}.`);
-        }
+        // if((msg.data.checkBox === true)){
+        //   if((tempCounter === figma.currentPage.selection.length)){
+        //   figma.closePlugin (`Generated ${input} ${typeInput} of ${languageInput}.`);
+        //   }
+        // }
     }
     // if(msg.type === 'cancel'){
     //   figma.closePlugin();
     // }
 };
-function noTextError() {
-    // const noTextError = "Please select a text layer.";
-    // figma.ui.postMessage({"error" : true,"errorMessage" : noTextError});
-    figma.closePlugin("Please select a text layer and run Desi Ipsum again.");
-}
+// function noTextError(){
+//   // const noTextError = "Please select a text layer.";
+//   // figma.ui.postMessage({"error" : true,"errorMessage" : noTextError});
+//   figma.closePlugin("Please select a text layer and run Desi Ipsum again.");
+// }
 //Functions are working fine!
 //Function to generate words
 function generateWords(inputArray, noOfWords) {

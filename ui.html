@@ -60,6 +60,7 @@
 
         <div>
           <button class="btn btn-primary btn-small" style="margin: 0 0 2%;" id="getDesiIpsum">Generate</button>
+          <!-- <button class="btn btn-primary btn-small" style="margin: 0 0 2%;" id="cancel">Cancel</button> -->
         </div>
 
       </div>
@@ -71,12 +72,12 @@
 
       <!-- Created a container at bottom to hold two elements at fixed position and at center. Added class in style for handling it -->
       <div class="bottomContainerOne">
-        <div class="bottomItemOne" >
+        <!-- <div class="bottomItemOne" >
           <input type="checkbox" id="close" style="margin: 0% 0 2%; background-color: #fafafa;" name="closeConfirm" value=""><label style="margin: 0 2% 0; font-size: small;" for="closeConfirm">Close plugin after generating text block</label><br>
-        </div>
+        </div> -->
 
-        <div class="bottomItemTwo">
-          <p style="font-size: 0.63rem; color: #2F86A6;">Disclaimer: This plugin generates text with random combinations without any suggestive meaning. </p>
+        <div class="bottomItemTwo" style="padding: 0 10% 0;">
+          <p style="font-size: 0.63rem; color: #2F86A6; opacity: 0.6;">Disclaimer: This plugin generates text with random combinations without any suggestive meaning. </p>
         </div>
       </div>
       
@@ -139,12 +140,12 @@
     const typeInput = type[0].value;
     const language = document.getElementById('language').selectedOptions;
     const languageInput = language[0].value;
-    const checkBox = document.getElementById('close').checked;
-    parent.postMessage({ pluginMessage: { type: 'get-desi-ipsum', data: {inputValue, languageInput, typeInput, checkBox}}}, '*');
+    // const checkBox = document.getElementById('close').checked;
+    parent.postMessage({ pluginMessage: { type: 'get-desi-ipsum', data: {inputValue, languageInput, typeInput}}}, '*');
   }
 
   // document.getElementById('cancel').onclick = () => {
-  //   parent.postMessage({ pluginMessage: { type: 'cancel'} }, '*')
+  //   parent.postMessage({ pluginMessage: { type: 'cancel'} },'*')
   // }
 
 </script>
