@@ -16,8 +16,6 @@ Initial development including 11 languages for this version
 - Punjabi
 - Gujarati
 
-Testing version is ready.
-
 Steps to use inside Figma:
 - Run the plugin
 - Select one or more text layers where you want to put generated text
