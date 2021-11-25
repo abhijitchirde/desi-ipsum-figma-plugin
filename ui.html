@@ -93,24 +93,7 @@
 
 //This block partially working. Need to restart plugin. Plugin should keep on checking (recursive function)
   onmessage = (event) => {
-    // if(event.data.pluginMessage.error === true){
-    //   document.getElementById("main").innerHTML = event.data.pluginMessage.errorMessage;
-    //   document.getElementById("main").style.color = "red";
-    //   document.getElementById("main").style.textAlign = "center";
-    //   document.getElementById("main").style.marginTop = "70px";
-    // }
-
-    // if(event.data.pluginMessage.notNumber === true){
-    //   document.getElementById("inputErrorText").innerHTML = event.data.pluginMessage.notNumberErrorMessage;
-    //   document.getElementById("main").style.color = "red";
-    // }
-
-    // if(event.data.pluginMessage.numNotPos === true){
-    //   document.getElementById("inputErrorText").innerHTML = event.data.pluginMessage.numNotPosErrorMessage;
-    //   document.getElementById("main").style.color = "red";
-    // }
-
-
+   
     //this error is working
     if(event.data.pluginMessage.error === "noTextLayer"){
       document.getElementById("inputErrorText").innerHTML = event.data.pluginMessage.message.nodeTypeError;

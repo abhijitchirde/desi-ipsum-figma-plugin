@@ -40,23 +40,16 @@ const wordSpace = {
 
 };
 
-const punctSetOne = [".","?","!",","];   //Marathi, Kannada, Tamil, Gujarati, Telugu, Malayalam
-const punctSetTwo = ["।","?","!",","];  //Hindi, Bangla, Odia, Punjabi
+//language specific punctuation marks
+const punctSetOne = [".","?","!",","];    //Marathi, Kannada, Tamil, Gujarati, Telugu, Malayalam
+const punctSetTwo = ["।","?","!",","];    //Hindi, Bangla, Odia, Punjabi
 const punctSetThree = ["।।","।"];         //Sanskrit
 
 figma.showUI(__html__,{width: 480, height: 290});
 
-// //need to work on this
-// if((figma.currentPage.selection.length === 0) || (figma.currentPage.selection[0].type !== "TEXT")) {
-//     noTextError();
-// }
-
-
 
 figma.ui.onmessage = msg => {
   
-  
-
 
   //Hi, Mr, Sa, Kn, Ta, Te, Ba, Gu, Ma works with 'Hind' font // Od works with 'Baloo Bhaina 2'  //'Nirmala UI' works for all
 
@@ -93,8 +86,6 @@ figma.ui.onmessage = msg => {
 
             figma.ui.postMessage({ error: "TextLayer"});
 
-            // tempCounter += 1;
-
             node.fontName = {
               family: 'Nirmala UI',
               style: 'Regular'
@@ -119,17 +110,8 @@ figma.ui.onmessage = msg => {
             {
               node.characters = generateParagraphs(wordSpace[`${languageInput}`], input, languageInput);
             }
-            // console.log(tempCounter);
         }
-          
-      
     }
-
-    // if(msg.data.checkBox === true){
-    //   // if((tempCounter === figma.currentPage.selection.length)){
-    //   figma.closePlugin(`Generated ${input} ${typeInput} of ${languageInput}.`);
-    //   // }
-    // }
     
   }
   
@@ -138,18 +120,6 @@ figma.ui.onmessage = msg => {
   }
 };
 
-
-
-
-
-// function noTextError(){
-//   // const noTextError = "Please select a text layer.";
-//   // figma.ui.postMessage({"error" : true,"errorMessage" : noTextError});
-//   figma.closePlugin("Please select a text layer and run Desi Ipsum again.");
-// }
-
-
-//Functions are working fine!
 
 
 //Function to generate words
@@ -162,11 +132,10 @@ function generateWords(inputArray, noOfWords){
     }else{
       outputText += `${randomWords} `;
     }
-    
-    
   }
   return outputText;
 }
+
 
 //Function to generate sentences
 function generateSentences(inputArray, noOfSentences, language){
@@ -179,7 +148,6 @@ function generateSentences(inputArray, noOfSentences, language){
       }else{
         outputText += generateWords(inputArray, randomInt(4,9)) + punctSetTwo[randomInt(0,4)] + " ";
       }
-      
     }
   }else if(language === "Sanskrit"){
     for(let j=0; j<noOfSentences; j++){
@@ -198,11 +166,10 @@ function generateSentences(inputArray, noOfSentences, language){
         outputText += generateWords(inputArray, randomInt(4,9)) + punctSetOne[randomInt(0,2)] + " ";
       }
     }
-
-
   }
   return outputText;
 }
+
 
 //Function to generate paragraphs
 function generateParagraphs(inputArray, noOfParagraphs, language){
@@ -213,6 +180,7 @@ function generateParagraphs(inputArray, noOfParagraphs, language){
   }
   return outputText;
 }
+
 
 //Function to generate random integer for sent and para
 function randomInt(min, max) {
