@@ -1,9 +1,10 @@
-**Version 1.0**
+**What is Desi**
 
-Figma plugin for generating random text blocks in Indian languages
+'Desi' is a word derived from Sanskrit 'Desa/Desam' (देश/देशम्) which means country, nation.Desi word is used to describe the people, culture, languages and sometimes products of Indian origin.
 
-Initial development including 11 languages for this version
+This is a Figma plugin for generating random text blocks in Indian languages
 
+**Current development includes 11 languages**
 - Hindi
 - Marathi
 - Sanskrit
@@ -16,7 +17,7 @@ Initial development including 11 languages for this version
 - Punjabi
 - Gujarati
 
-Steps to use inside Figma:
+**Steps to use inside Figma**
 1. Run the plugin
 2. Select one or more text layers where you want to put generated text
 3. Add the number and select type of text block such as Words, Sentences, or Paragraphs
