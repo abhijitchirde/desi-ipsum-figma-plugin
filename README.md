@@ -2,7 +2,11 @@
 
 'Desi' is a word derived from Sanskrit 'Desa/Desam' (देश/देशम्) which means country, nation.Desi word is used to describe the people, culture, languages and sometimes products of Indian origin.
 
+---
+
 This is a Figma plugin for generating random text blocks in Indian languages
+
+---
 
 **Current development includes 11 languages**
 - Hindi
@@ -16,6 +20,8 @@ This is a Figma plugin for generating random text blocks in Indian languages
 - Odia
 - Punjabi
 - Gujarati
+
+---
 
 **Steps to use inside Figma**
 1. Run the plugin
