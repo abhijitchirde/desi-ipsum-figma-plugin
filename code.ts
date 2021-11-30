@@ -45,7 +45,7 @@ const punctSetOne = [".","?","!",","];    //Marathi, Kannada, Tamil, Gujarati, T
 const punctSetTwo = ["।","?","!",","];    //Hindi, Bangla, Odia, Punjabi
 const punctSetThree = ["।।","।"];         //Sanskrit
 
-figma.showUI(__html__,{width: 450, height: 260});
+figma.showUI(__html__,{width: 420, height: 250});
 
 
 figma.ui.onmessage = msg => {

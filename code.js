@@ -27,7 +27,7 @@ const wordSpace = {
 const punctSetOne = [".", "?", "!", ","]; //Marathi, Kannada, Tamil, Gujarati, Telugu, Malayalam
 const punctSetTwo = ["।", "?", "!", ","]; //Hindi, Bangla, Odia, Punjabi
 const punctSetThree = ["।।", "।"]; //Sanskrit
-figma.showUI(__html__, { width: 450, height: 260 });
+figma.showUI(__html__, { width: 420, height: 250 });
 figma.ui.onmessage = msg => {
     if (msg.type === 'get-desi-ipsum') {
         const input = parseInt(msg.data.inputValue, 10);

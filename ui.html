@@ -29,32 +29,37 @@
     margin: auto;
     width: 400px;
   }
+
+  .text-medium {
+    font-size: small;
+    font-weight: 400;
+  }
 </style>
 
 
 <div id="main" class="text-center">
-      <p style="color: #396EB0; margin: 4% 0 6%; font-size: small; font-weight: 400;"> Generate random text in Indian languages</p>
-      <div class="text-center" style="background-color: #fafafa; width: 100%; padding: 4% 3% 2%; align-items: center;">
+      <p class="text-medium" style="color: #396EB0; margin: 4% 0 6%;"> Generate random text in Indian languages</p>
+      <div class="text-center" style="background-color: #fafafa; width: 100%; padding: 3% 3% 3%; align-items: center;">
         <div class="input-group" style="align-items: center; margin-bottom: 4%; margin-left: 3%; margin-right: 2%;">
-            <input class="form-control" style="border-radius: 5px; max-width: 12%; max-height: 37px; font-weight: 400; font-size: large; color: navy; margin-right: 2%;" id="inputBox" value="5">
-            <select class="form-control form-select" style="border-radius: 5px; max-width: 29%; font-weight: 400; margin-right: 3%;" id="type" name="">
-              <option id="words" value="words">Words</option>
-              <option id="sent" value="sentences" selected>Sentences</option>
-              <option id="para" value="paragraphs">Paragraphs</option>
+            <input class="form-control text-medium" style="border-radius: 5px; max-width: 11%; max-height: 37px; color: navy; margin-right: 2%;" id="inputBox" value="5">
+            <select class="form-control form-select text-medium" style="border-radius: 5px; max-width: 29%; margin-right: 3%; " id="type" name="">
+              <option id="words" class="text-medium" value="words">Words</option>
+              <option id="sent" class="text-medium" value="sentences" selected>Sentences</option>
+              <option id="para" class="text-medium" value="paragraphs">Paragraphs</option>
             </select>
-            <p style="color: black; margin-right: 3%; margin-top: 3%; font-size: large; font-weight: 400;">in</p>
-            <select class="form-control form-select" style="border-radius: 5px; font-weight: 400; max-width: 42%;" id="language" name="">
-              <option id="hi" value="Hindi" selected>Hindi (हिंदी)</option>
-              <option id="sa" value="Sanskrit">Sanskrit (संस्कृतम्)</option>
-              <option id="mr" value="Marathi">Marathi (मराठी)</option>
-              <option id="kn" value="Kannada">Kannada (ಕನ್ನಡ)</option>
-              <option id="ta" value="Tamil">Tamil (தமிழ்)</option>
-              <option id="te" value="Telugu">Telugu (తెలుగు)</option>
-              <option id="ba" value="Bangla">Bangla (বাংলা)</option>
-              <option id="gu" value="Gujarati">Gujarati (ગુજરાતી)</option>
-              <option id="ma" value="Malayalam">Malayalam (മലയാളം)</option>
-              <option id="od" value="Odia">Odia (ଓଡ଼ିଆ)</option>
-              <option id="pa" value="Punjabi">Punjabi (ਪੰਜਾਬੀ)</option>
+            <p style="color: black; margin-right: 3%; margin-top: 3%; font-size: medium; font-weight: 400;">in</p>
+            <select class="form-control form-select text-medium" style="border-radius: 5px; max-width: 42%; " id="language" name="">
+              <option id="hi" class="text-medium" value="Hindi" selected>Hindi (हिंदी)</option>
+              <option id="sa" class="text-medium" value="Sanskrit">Sanskrit (संस्कृतम्)</option>
+              <option id="mr" class="text-medium" value="Marathi">Marathi (मराठी)</option>
+              <option id="kn" class="text-medium" value="Kannada">Kannada (ಕನ್ನಡ)</option>
+              <option id="ta" class="text-medium" value="Tamil">Tamil (தமிழ்)</option>
+              <option id="te" class="text-medium" value="Telugu">Telugu (తెలుగు)</option>
+              <option id="ba" class="text-medium" value="Bangla">Bangla (বাংলা)</option>
+              <option id="gu" class="text-medium" value="Gujarati">Gujarati (ગુજરાતી)</option>
+              <option id="ma" class="text-medium" value="Malayalam">Malayalam (മലയാളം)</option>
+              <option id="od" class="text-medium" value="Odia">Odia (ଓଡ଼ିଆ)</option>
+              <option id="pa" class="text-medium" value="Punjabi">Punjabi (ਪੰਜਾਬੀ)</option>
             </select>
         </div>
 
