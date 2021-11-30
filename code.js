@@ -1,15 +1,12 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
+const fonts = [
+    { family: 'Hind', style: 'Regular' },
+    { family: 'Baloo Bhaina 2', style: 'Regular' },
+    { family: 'Mukta Mahee', style: 'Regular' },
+    { family: 'Mukta', style: 'Regular' },
+];
 function loadFont() {
-    return __awaiter(this, void 0, void 0, function* () {
-        yield figma.loadFontAsync({ family: 'Nirmala UI', style: 'Regular' });
+    fonts.forEach(function (font) {
+        figma.loadFontAsync(font);
     });
 }
 loadFont();
@@ -32,18 +29,15 @@ const punctSetTwo = ["।", "?", "!", ","]; //Hindi, Bangla, Odia, Punjabi
 const punctSetThree = ["।।", "।"]; //Sanskrit
 figma.showUI(__html__, { width: 480, height: 290 });
 figma.ui.onmessage = msg => {
-    //Hi, Mr, Sa, Kn, Ta, Te, Ba, Gu, Ma works with 'Hind' font //'Nirmala UI' works for all
     if (msg.type === 'get-desi-ipsum') {
         const input = parseInt(msg.data.inputValue, 10);
         const typeInput = msg.data.typeInput;
         const languageInput = msg.data.languageInput;
-        // let tempCounter = 0;
         if (figma.currentPage.selection.length === 0) {
             const nodeTypeError = "Please select a text layer";
             figma.ui.postMessage({ error: "noTextLayer", message: { nodeTypeError } }); //added error message if node is not text
         }
         for (const node of figma.currentPage.selection) {
-            //This error test is working
             if (node.type !== 'TEXT') {
                 const nodeTypeError = "Please select a text layer";
                 figma.ui.postMessage({ error: "noTextLayer", message: { nodeTypeError } }); //added error message if node is not text
@@ -58,11 +52,12 @@ figma.ui.onmessage = msg => {
             }
             else if (node.type === 'TEXT') {
                 figma.ui.postMessage({ error: "TextLayer" });
-                node.fontName = {
-                    family: 'Nirmala UI',
-                    style: 'Regular'
-                };
-                node.name = `Desi ipsum - ${languageInput}`;
+                // node.fontName = {
+                //   family: 'Nirmala UI',
+                //   style: 'Regular'
+                // };
+                setNodeFont(node, languageInput);
+                // node.name = `${languageInput} text`;
                 if (typeInput === 'words') {
                     node.characters = generateWords(wordSpace[`${languageInput}`], input);
                     if (msg.data.checkBox === true) {
@@ -85,6 +80,33 @@ figma.ui.onmessage = msg => {
         figma.closePlugin();
     }
 };
+//function for setting fonts depending on languages
+function setNodeFont(currentNode, language) {
+    if (language === 'Odia') {
+        currentNode.fontName = {
+            family: 'Baloo Bhaina 2',
+            style: 'Regular'
+        };
+    }
+    else if (language === 'Punjabi') {
+        currentNode.fontName = {
+            family: 'Mukta Mahee',
+            style: 'Regular'
+        };
+    }
+    else if (language === 'Marathi' || language === 'Hindi' || language === 'Sanskrit') {
+        currentNode.fontName = {
+            family: 'Mukta',
+            style: 'Regular'
+        };
+    }
+    else {
+        currentNode.fontName = {
+            family: 'Hind',
+            style: 'Regular'
+        };
+    }
+}
 //Function to generate words
 function generateWords(inputArray, noOfWords) {
     let outputText = "";
@@ -140,7 +162,12 @@ function generateParagraphs(inputArray, noOfParagraphs, language) {
     //One sentence to have 3-6 sentences. Punct mark at end. A line break between each para
     let outputText = "";
     for (let k = 0; k < noOfParagraphs; k++) {
-        outputText += generateSentences(inputArray, randomInt(3, 7), language) + "\n" + "\n";
+        if (k == noOfParagraphs - 1) {
+            outputText += generateSentences(inputArray, randomInt(3, 7), language);
+        }
+        else {
+            outputText += generateSentences(inputArray, randomInt(3, 7), language) + "\n" + "\n";
+        }
     }
     return outputText;
 }
