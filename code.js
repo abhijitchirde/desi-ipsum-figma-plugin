@@ -27,7 +27,7 @@ const wordSpace = {
 const punctSetOne = [".", "?", "!", ","]; //Marathi, Kannada, Tamil, Gujarati, Telugu, Malayalam
 const punctSetTwo = ["।", "?", "!", ","]; //Hindi, Bangla, Odia, Punjabi
 const punctSetThree = ["।।", "।"]; //Sanskrit
-figma.showUI(__html__, { width: 480, height: 290 });
+figma.showUI(__html__, { width: 450, height: 260 });
 figma.ui.onmessage = msg => {
     if (msg.type === 'get-desi-ipsum') {
         const input = parseInt(msg.data.inputValue, 10);
@@ -57,7 +57,7 @@ figma.ui.onmessage = msg => {
                 //   style: 'Regular'
                 // };
                 setNodeFont(node, languageInput);
-                // node.name = `${languageInput} text`;
+                node.name = `${languageInput} text`;
                 if (typeInput === 'words') {
                     node.characters = generateWords(wordSpace[`${languageInput}`], input);
                     if (msg.data.checkBox === true) {

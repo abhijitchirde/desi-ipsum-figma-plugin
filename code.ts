@@ -45,7 +45,7 @@ const punctSetOne = [".","?","!",","];    //Marathi, Kannada, Tamil, Gujarati, T
 const punctSetTwo = ["।","?","!",","];    //Hindi, Bangla, Odia, Punjabi
 const punctSetThree = ["।।","।"];         //Sanskrit
 
-figma.showUI(__html__,{width: 480, height: 290});
+figma.showUI(__html__,{width: 450, height: 260});
 
 
 figma.ui.onmessage = msg => {
@@ -88,7 +88,7 @@ figma.ui.onmessage = msg => {
 
             setNodeFont(node, languageInput);
 
-            // node.name = `${languageInput} text`;
+            node.name = `${languageInput} text`;
 
             if(typeInput === 'words')
             {

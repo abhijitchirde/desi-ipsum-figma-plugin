@@ -33,16 +33,16 @@
 
 
 <div id="main" class="text-center">
-      <p style="color: #396EB0; margin: 4% 0 6%; font-size: medium; font-weight: 600;"> Generate text in Indian languages</p>
+      <p style="color: #396EB0; margin: 4% 0 6%; font-size: small; font-weight: 400;"> Generate random text in Indian languages</p>
       <div class="text-center" style="background-color: #fafafa; width: 100%; padding: 4% 3% 2%; align-items: center;">
-        <div class="input-group" style="align-items: center; margin: 0 2% 4%;">
-            <input class="form-control" style="border-radius: 5px; max-width: 10%; max-height: 40px; font-weight: 400; font-size: large; color: navy; margin-right: 2%;" id="inputBox" value="5">
-            <select class="form-control form-select" style="border-radius: 5px; max-width: 29%; font-weight: 400; margin-right: 5%;" id="type" name="">
+        <div class="input-group" style="align-items: center; margin-bottom: 4%; margin-left: 3%; margin-right: 2%;">
+            <input class="form-control" style="border-radius: 5px; max-width: 10%; max-height: 37px; font-weight: 400; font-size: large; color: navy; margin-right: 2%;" id="inputBox" value="5">
+            <select class="form-control form-select" style="border-radius: 5px; max-width: 29%; font-weight: 400; margin-right: 3%;" id="type" name="">
               <option id="words" value="words">Words</option>
               <option id="sent" value="sentences" selected>Sentences</option>
               <option id="para" value="paragraphs">Paragraphs</option>
             </select>
-            <p style="color: black; margin-right: 5%; margin-top: 3%; font-size: large; font-weight: 400;">in</p>
+            <p style="color: black; margin-right: 3%; margin-top: 3%; font-size: large; font-weight: 400;">in</p>
             <select class="form-control form-select" style="border-radius: 5px; font-weight: 400; max-width: 42%;" id="language" name="">
               <option id="hi" value="Hindi" selected>Hindi (हिंदी)</option>
               <option id="sa" value="Sanskrit">Sanskrit (संस्कृतम्)</option>
@@ -59,14 +59,15 @@
         </div>
 
         <div style="align-content: center;">
-          <button class="btn btn-primary btn-medium" style="margin: 0 1% 2%;" id="getDesiIpsum">Generate</button>
-          <button class="btn btn-outline-secondary btn-medium" style="margin: 0 1% 2%;" id="close">Cancel</button>
+          <button class="btn btn-primary btn-sm" style="margin: 0 1% 2%;" id="getDesiIpsum">Generate</button>
+          <button class="btn btn-outline-secondary btn-sm" style="margin: 0 1% 2%;" id="close">Cancel</button>
         </div>
 
       </div>
 
-      <div style="margin: 2% 0 0%; background-color: #fff; max-height: 7%;">
-        <p id="inputErrorText" style="display: none; color: red;">No error</p> 
+      <!-- Error text area -->
+      <div style="margin: 3% 0 0%; background-color: #fff; max-height: 7%; ">
+        <p id="inputErrorText" style="display: none; color: red; font-size: small;">No error</p> 
       </div>
 
 
@@ -76,9 +77,9 @@
           <input type="checkbox" id="close" style="margin: 0% 0 2%; background-color: #fafafa;" name="closeConfirm" value=""><label style="margin: 0 2% 0; font-size: small;" for="closeConfirm">Close plugin after generating text block</label><br>
         </div> -->
 
-        <div class="bottomItemTwo" style="padding: 0 3% 0;">
+        <!-- <div class="bottomItemTwo" style="padding: 0 3% 0;">
           <p style="font-size: 0.63rem; color: #2F86A6; opacity: 0.6;">Disclaimer: This plugin generates text with random combinations without any suggestive meaning. </p>
-        </div>
+        </div> -->
       </div>
       
 
