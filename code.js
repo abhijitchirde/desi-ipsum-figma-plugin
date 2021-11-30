@@ -52,10 +52,6 @@ figma.ui.onmessage = msg => {
             }
             else if (node.type === 'TEXT') {
                 figma.ui.postMessage({ error: "TextLayer" });
-                // node.fontName = {
-                //   family: 'Nirmala UI',
-                //   style: 'Regular'
-                // };
                 setNodeFont(node, languageInput);
                 node.name = `${languageInput} text`;
                 if (typeInput === 'words') {
