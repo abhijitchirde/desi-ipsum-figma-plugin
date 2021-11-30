@@ -1,18 +1,3 @@
-// const fonts = [
-//   {family: 'Nirmala UI', style: 'Regular'},
-//   {family: 'Roboto', style: 'Regular'},
-//   {family: 'Arial', style: 'Regular'},
-//   {family: 'Helvetica', style: 'Regular'},
-//   {family: 'Hind', style: 'Regular'},
-// ];
-
-// function loadFonts(){
-//   fonts.forEach(function(font){
-//     figma.loadFontAsync(font);
-//   });
-// }
-
-// loadFonts();
 
 async function loadFont(){
   await figma.loadFontAsync({family: 'Nirmala UI', style: 'Regular'});

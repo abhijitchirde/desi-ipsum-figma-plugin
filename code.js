@@ -1,10 +1,3 @@
-// const fonts = [
-//   {family: 'Nirmala UI', style: 'Regular'},
-//   {family: 'Roboto', style: 'Regular'},
-//   {family: 'Arial', style: 'Regular'},
-//   {family: 'Helvetica', style: 'Regular'},
-//   {family: 'Hind', style: 'Regular'},
-// ];
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -14,12 +7,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-// function loadFonts(){
-//   fonts.forEach(function(font){
-//     figma.loadFontAsync(font);
-//   });
-// }
-// loadFonts();
 function loadFont() {
     return __awaiter(this, void 0, void 0, function* () {
         yield figma.loadFontAsync({ family: 'Nirmala UI', style: 'Regular' });
