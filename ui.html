@@ -105,7 +105,6 @@
       document.getElementById("inputErrorText").innerHTML = event.data.pluginMessage.message.nodeTypeError;
       document.getElementById("inputErrorText").style.display = "block";
       document.getElementById("inputErrorText").style.color = "red";
-
     }else if(event.data.pluginMessage.error === "TextLayer"){
       document.getElementById("inputErrorText").style.display = "none";
     }else if(event.data.pluginMessage.error === "inputNotNumber"){
