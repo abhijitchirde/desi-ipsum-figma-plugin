@@ -16,19 +16,22 @@
     width: 100%;
   }
 
-  .bottomItemOne {
+  .bottomItem {
     background: none repeat scroll 0 0 white;
-    height: 37px;
+    height: 35px;
     margin: auto;
     width: 400px;
   }
 
-  .bottomItemTwo {
-    background: none repeat scroll 0 0 white;
-    height: 50px;
-    margin: auto;
-    width: 400px;
-  }
+  .disclaimer {
+  border: none;
+  font-size: 0.7rem;
+  text-align: left;
+  background-color: #FFF;
+  color: darkgrey;
+  cursor: pointer;
+  
+}
 
   .text-medium {
     font-size: small;
@@ -78,13 +81,9 @@
 
       <!-- Created a container at bottom to hold two elements at fixed position and at center. Added class in style for handling it -->
       <div class="bottomContainerOne">
-        <!-- <div class="bottomItemOne" >
-          <input type="checkbox" id="close" style="margin: 0% 0 2%; background-color: #fafafa;" name="closeConfirm" value=""><label style="margin: 0 2% 0; font-size: small;" for="closeConfirm">Close plugin after generating text block</label><br>
-        </div> -->
 
-        <div class="bottomItemTwo" style="padding: 0 3% 3%;">
-          <button id="disclaimer" style="color: lightgray; border: none; background-color: white; font-size: smaller;">Disclaimer notice</button>
-          <!-- <p style="font-size: 0.63rem; color: #2F86A6; opacity: 0.6;">Disclaimer notice: This plugin generates text with random combinations without any suggestive meaning. </p> -->
+        <div class="bottomItem" style="padding: 0 3% 3%;">
+          <button class="disclaimer" id="disclaimer">Disclaimer notice</button>
         </div>
       </div>
       
