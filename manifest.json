@@ -2,7 +2,7 @@
   "name": "Desi Ipsum",
   "id": "1047585682551481419",
   "api": "1.0.0",
-  "main": "code.js",
+  "main": "code.min.js",
   "editorType": [
     "figma"
   ],
