@@ -14,7 +14,7 @@ function loadFont(){
 
 loadFont();
 
-figma.showUI(__html__,{width: 420, height: 260});
+figma.showUI(__html__,{width: 400, height: 220});
 
 const wordSpace = {
 
@@ -50,7 +50,6 @@ const punctSetThree = ["।।","।"];         //Sanskrit
 
 figma.ui.onmessage = msg => {
 
-
   if (msg.type === 'get-desi-ipsum') {
 
     const input = parseInt(msg.data.inputValue, 10);
@@ -59,28 +58,22 @@ figma.ui.onmessage = msg => {
 
 
     if(figma.currentPage.selection.length === 0){
-      const nodeTypeError = "Please select a text layer";
-      figma.ui.postMessage({error: "noTextLayer", message:{nodeTypeError}});           //added error message if node is not text
+      figma.notify("Please select a text layer", {timeout: 1500});
     }
 
     for(const node of figma.currentPage.selection){
-
         if(node.type !== 'TEXT'){
-          const nodeTypeError = "Please select a text layer";
-          figma.ui.postMessage({error: "noTextLayer", message:{nodeTypeError}});           //added error message if node is not text
+          figma.notify("Please select a text layer", {timeout: 1500});
         } 
         else if(isNaN(msg.data.inputValue)){
-          const notANumber = "Please enter a number";
-          figma.ui.postMessage({error: "inputNotNumber", message:{notANumber}});
+          figma.notify("Please enter a number", {timeout: 1500});
         }
         else if(msg.data.inputValue <= 0){
-          const lessThanZero = "Please enter a number greater than 0";
-          figma.ui.postMessage({error: "inputLessThanZero", message:{lessThanZero}});
+          figma.notify("Please enter a number greater than 0", {timeout: 1500});
         }          
         else if(node.type === 'TEXT'){
 
             figma.ui.postMessage({ error: "TextLayer"});
-
 
             setNodeFont(node, languageInput);
 
@@ -114,7 +107,7 @@ figma.ui.onmessage = msg => {
   }
 
   if(msg.type === 'disclaimer'){
-    figma.notify("'Desi Ipsum' generates text using random combination of words without any suggestive meaning.",{timeout:3000});
+    figma.notify("'Desi Ipsum' generates random text without carrying any literal meaning.", {timeout:3000});
   }
 };
 
