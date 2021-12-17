@@ -1,124 +1,282 @@
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <style>
-  .hide {
-    display: none;
-  }
-  .red-text {
-    color: red;
+
+ body {
+   font-family: Arial, Helvetica, sans-serif;
+ } 
+
+/* heading styling */
+
+.head-label {
+  color: #215199; 
+  margin: 4% 0;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+/* larger content div  */
+
+.main-content-div {
+  background-color: #f7fafd; 
+  width: 100%; 
+  padding: 3% 0%;
+  margin-top: 2%; 
+  text-align: center;
+  display: block;
+  border-radius: 5px;
+}
+
+/* input group div styling */
+
+.input-group-div {
+  display: block;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+.input-one-div {
+  display: inline-block;
+  width: 40%;
+  text-align: center;
+}
+
+.input-two-div {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+}
+
+.conj-text-div {
+  display: inline-block;
+  width: 10%;
+  text-align: center;
+}
+
+/* input number field */
+.input-number {
+  border-radius: 3px; 
+  width: 13%; 
+  height: 16%; 
+  color: navy; 
+  margin-right: 2%;
+  text-align: center;
+  display: inline-block;
+  font-size: 0.9rem;
+  border: 0.5px solid darkgray;
+}
+
+/* dropdown styling */
+.dropdown-main-type {
+  border-radius: 3px; 
+  width: 27%; 
+  height: 16%;
+  font-size: 0.9rem;
+  text-align: center;
+  display: inline-block;
+  padding-left: 1%;
+  border: 0.5px solid darkgray;
+}
+
+.dropdown-main-lang {
+  border-radius: 3px; 
+  width: 40%; 
+  height: 16%;
+  font-size: 0.9rem;
+  text-align: center;
+  display: inline-block;
+  padding-left: 1%;
+  border: 0.5px solid darkgray;
+}
+
+.dropdown-item {
+  font-size: 0.9rem;
+  height: 16%;
+  padding: 1% 1%;
+}
+
+.conj-text {
+  color: black; 
+  margin-right: 2%; 
+  margin-left: 2%; 
+  margin-top: 3%; 
+  font-size: 0.8rem; 
+  display: inline-block;
+  text-align: center;
+}
+
+/* buttons styling */
+
+  .button-pri {
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin: 1.358% 0.8% 1.358%;
+    padding: 1.7% 0.2%;
+    width: 24%;
+    display: inline;
+    border: 0.5px solid #1471fd;
+    background-color: #1471fd;
+    border-radius: 4px;
+    color: #FFF;
+    cursor: pointer;
   }
 
-  .bottomContainerOne{
-    background: none repeat scroll 0 0 transparent;
-    bottom: 0;
-    position: fixed;
+  .button-sec {
+    font-size: 0.8rem;
+    margin: 1.358% 0.8% 1.358%;
+    padding: 1.7% 0.2%;
+    width: 24%;
+    display: inline;
+    border: 0.5px solid #1471fd;
+    background-color: #fff;
+    border-radius: 4px;
+    color: #1471fd;
+    cursor: pointer;
+  }
+
+  .button-pri:hover, .button-sec:hover {
+    background-color: #1471fd; 
+    border: 0.5px solid #1471fd;
+    color: #fff;
+    transition-duration: 0.2s;
+  }
+
+  .button-pri:active, .button-sec:active {
+    background-color: #074aaf;
+    border: 0.5px solid #074aaf;
+    color: #fff;
+    transition-duration: 0.2s;
+    box-shadow: none;
+  }
+
+  .buttons-div {
     text-align: center;
+    display: block;
     width: 100%;
+    margin: 3% 0;
   }
 
-  .bottomItem {
-    background: none repeat scroll 0 0 white;
-    height: 35px;
-    margin: auto;
-    width: 400px;
-  }
 
-  .disclaimer {
+  /* Footer styling */
+
+.credit-text {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.65rem;
+  color: rgb(183, 201, 235);
+  /* color: #7D7D7D; */
+  margin: 2% 0 0;
+  text-align: right;
+  display: inline-block;
+  padding-left: 0;
+}
+
+a:link, a:visited {
+  color: rgb(183, 201, 235);
+  /* color: #7D7D7D; */
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(108, 125, 155);
+}
+
+.bottomContainer{
+  background: none repeat scroll 0 0 transparent;
+  bottom: 3.49%;
+  position: fixed;
+  width: 100%;
+  display: block;
+  padding-left: 2%;
+}
+
+.bottomItem{
+  height: 7%;
+  margin: auto;
+  width: 100%;
+  display: inline-block;
+}
+
+.disclaimer-text {
   border: none;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   text-align: left;
-  background-color: #FFF;
-  color: darkgrey;
+  background-color: rgb(253, 253, 253, 0);
+  color: rgb(183, 201, 235);
+  /* color: #7D7D7D; */
   cursor: pointer;
   
 }
 
-  .text-medium {
-    font-size: small;
-    font-weight: 400;
-  }
+.disclaimer-text:hover {
+  color: rgb(108, 125, 155);
+}
+
+
+.blank-space-in-footer {
+  display: inline-block;
+  width: 48%;
+}
+
+
 </style>
 
+      <p class="head-label"> Generate random text in Indian languages</p>
 
-<div id="main" class="text-center">
-      <p class="text-medium" style="color: #2179e4; margin: 4% 0 6%;"> Generate random text in Indian languages</p>
-      <div class="text-center" style="background-color: #fafafa; width: 100%; padding: 3% 3% 3%; align-items: center;">
-        <div class="input-group" style="align-items: center; margin-bottom: 4%; margin-left: 3%; margin-right: 2%;">
-            <input class="form-control text-medium" style="border-radius: 5px; max-width: 11%; max-height: 37px; color: navy; margin-right: 2%;" id="inputBox" value="5">
-            <select class="form-control form-select text-medium" style="border-radius: 5px; max-width: 29%; margin-right: 3%; " id="type" name="">
-              <option id="words" class="text-medium" value="words">Words</option>
-              <option id="sent" class="text-medium" value="sentences" selected>Sentences</option>
-              <option id="para" class="text-medium" value="paragraphs">Paragraphs</option>
-            </select>
-            <p style="color: black; margin-right: 3%; margin-top: 3%; font-size: medium; font-weight: 400;">in</p>
-            <select class="form-control form-select text-medium" style="border-radius: 5px; max-width: 42%; " id="language" name="">
-              <option id="hi" class="text-medium" value="Hindi" selected>Hindi (हिंदी)</option>
-              <option id="sa" class="text-medium" value="Sanskrit">Sanskrit (संस्कृतम्)</option>
-              <option id="mr" class="text-medium" value="Marathi">Marathi (मराठी)</option>
-              <option id="kn" class="text-medium" value="Kannada">Kannada (ಕನ್ನಡ)</option>
-              <option id="ta" class="text-medium" value="Tamil">Tamil (தமிழ்)</option>
-              <option id="te" class="text-medium" value="Telugu">Telugu (తెలుగు)</option>
-              <option id="ba" class="text-medium" value="Bangla">Bangla (বাংলা)</option>
-              <option id="gu" class="text-medium" value="Gujarati">Gujarati (ગુજરાતી)</option>
-              <option id="ma" class="text-medium" value="Malayalam">Malayalam (മലയാളം)</option>
-              <option id="od" class="text-medium" value="Odia">Odia (ଓଡ଼ିଆ)</option>
-              <option id="pa" class="text-medium" value="Punjabi">Punjabi (ਪੰਜਾਬੀ)</option>
-            </select>
-        </div>
+      <div class="main-content-div">
 
-        <div style="align-content: center;">
-          <button class="btn btn-primary btn-sm" style="margin: 0 1% 2%;" id="getDesiIpsum">Generate</button>
-          <button class="btn btn-outline-secondary btn-sm" style="margin: 0 1% 2%;" id="close">Cancel</button>
+        <div class="input-group-div">
+
+
+            <input class="input-number" type="number" id="inputBox" value="5">
+            <select class="dropdown-main-type" id="type" name="">
+              <option id="words" class="dropdown-item" value="words">Words</option>
+              <option id="sent" class="dropdown-item" value="sentences" selected>Sentences</option>
+              <option id="para" class="dropdown-item" value="paragraphs">Paragraphs</option>
+            </select>
+
+
+
+            <p class="conj-text">in</p>
+
+
+
+            <select class="dropdown-main-lang" id="language" name="">
+              <option id="hi" class="dropdown-item" value="Hindi" selected>Hindi (हिंदी)</option>
+              <option id="sa" class="dropdown-item" value="Sanskrit">Sanskrit (संस्कृतम्)</option>
+              <option id="mr" class="dropdown-item" value="Marathi">Marathi (मराठी)</option>
+              <option id="kn" class="dropdown-item" value="Kannada">Kannada (ಕನ್ನಡ)</option>
+              <option id="ta" class="dropdown-item" value="Tamil">Tamil (தமிழ்)</option>
+              <option id="te" class="dropdown-item" value="Telugu">Telugu (తెలుగు)</option>
+              <option id="ba" class="dropdown-item" value="Bangla">Bangla (বাংলা)</option>
+              <option id="gu" class="dropdown-item" value="Gujarati">Gujarati (ગુજરાતી)</option>
+              <option id="ma" class="dropdown-item" value="Malayalam">Malayalam (മലയാളം)</option>
+              <option id="od" class="dropdown-item" value="Odia">Odia (ଓଡ଼ିଆ)</option>
+              <option id="pa" class="dropdown-item" value="Punjabi">Punjabi (ਪੰਜਾਬੀ)</option>
+            </select>
+   
         </div>
 
       </div>
 
-      <!-- Error text area -->
-      <div style="margin: 2% 0 1%; background-color: #fff; max-height: 7%; ">
-        <p id="inputErrorText" style="display: none; color: red; font-size: small;">No error</p> 
+      <div class="buttons-div">
+        <button class="button-pri" id="getDesiIpsum">Generate</button>
+        <button class="button-sec" id="close">Cancel</button>
       </div>
 
 
       <!-- Created a container at bottom to hold two elements at fixed position and at center. Added class in style for handling it -->
-      <div class="bottomContainerOne">
-
-        <div class="bottomItem" style="padding: 0 3% 3%;">
-          <button class="disclaimer" id="disclaimer">Disclaimer notice</button>
-        </div>
+      <div class="bottomContainer">
+        <footer class="bottomItem">
+          <button class="disclaimer-text" id="disclaimer" >Disclaimer notice</button>
+          <div class="blank-space-in-footer"></div>
+          <p class="credit-text"><a href="https://twitter.com/abhichirde" target="_blank">by Abhijit Chirde</a></p> 
+          
+        </footer>
       </div>
       
-
-      
-
-      
-</div>
   
 
 
 <script>
-
-//This block working.
-  onmessage = (event) => {
-   
-    //this error is working
-    if(event.data.pluginMessage.error === "noTextLayer"){
-      document.getElementById("inputErrorText").innerHTML = event.data.pluginMessage.message.nodeTypeError;
-      document.getElementById("inputErrorText").style.display = "block";
-      document.getElementById("inputErrorText").style.color = "red";
-    }else if(event.data.pluginMessage.error === "TextLayer"){
-      document.getElementById("inputErrorText").style.display = "none";
-    }else if(event.data.pluginMessage.error === "inputNotNumber"){
-      document.getElementById("inputErrorText").innerHTML = event.data.pluginMessage.message.notANumber;
-      document.getElementById("inputErrorText").style.display = "block";
-      document.getElementById("inputErrorText").style.color = "red";
-    }else if(event.data.pluginMessage.error === "inputLessThanZero"){
-      document.getElementById("inputErrorText").innerHTML = event.data.pluginMessage.message.lessThanZero;
-      document.getElementById("inputErrorText").style.display = "block";
-      document.getElementById("inputErrorText").style.color = "red";
-    }
-
-
-  }
 
   //This code block is working! Getting all three inputs in TS file
   document.getElementById('getDesiIpsum').onclick = () => {
