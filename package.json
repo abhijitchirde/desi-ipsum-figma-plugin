@@ -1,7 +1,7 @@
 {
   "name": "Desi-Ipsum",
   "version": "1.0.0",
-  "description": "Generate blocks of text in Indian languages",
+  "description": "Generate blocks of random text in Indian languages",
   "main": "code.min.js",
   "scripts": {
     "build": "tsc -p tsconfig.json"
