@@ -118,7 +118,7 @@ function generateWords(inputArray, noOfWords) {
 }
 //Function to generate sentences
 function generateSentences(inputArray, noOfSentences, language) {
-    //One sentence to have 4-8 words. Punct mark at end. //Only using period as punctuation marks for simplicity
+    //One sentence to have 4-9 words. Punct mark at end. //Only using period as punctuation marks for simplicity
     let outputText = "";
     if (language === "Hindi" || language === "Bangla" || language === "Odia" || language === "Punjabi") {
         for (let i = 0; i < noOfSentences; i++) {
@@ -154,14 +154,14 @@ function generateSentences(inputArray, noOfSentences, language) {
 }
 //Function to generate paragraphs
 function generateParagraphs(inputArray, noOfParagraphs, language) {
-    //One sentence to have 3-6 sentences. Punct mark at end. A line break between each para
+    //One sentence to have 4-8 sentences. Punct mark at end. A line break between each para
     let outputText = "";
     for (let k = 0; k < noOfParagraphs; k++) {
         if (k == noOfParagraphs - 1) {
-            outputText += generateSentences(inputArray, randomInt(3, 7), language);
+            outputText += generateSentences(inputArray, randomInt(4, 8), language);
         }
         else {
-            outputText += generateSentences(inputArray, randomInt(3, 7), language) + "\n" + "\n";
+            outputText += generateSentences(inputArray, randomInt(4, 8), language) + "\n" + "\n";
         }
     }
     return outputText;
@@ -170,5 +170,5 @@ function generateParagraphs(inputArray, noOfParagraphs, language) {
 function randomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min);
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
