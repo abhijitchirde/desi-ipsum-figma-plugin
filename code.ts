@@ -14,7 +14,7 @@ function loadFont(){
 
 loadFont();
 
-figma.showUI(__html__,{width: 400, height: 220});
+figma.showUI(__html__,{width: 350, height: 200});
 
 const wordSpace = {
 

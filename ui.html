@@ -1,112 +1,112 @@
 <style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
 
- body {
-   font-family: Arial, Helvetica, sans-serif;
- } 
+  /* heading styling */
 
-/* heading styling */
+  .head-label {
+    color: #567fbd;
+    margin: 4% 0;
+    text-align: center;
+    font-size: 0.85rem;
+  }
 
-.head-label {
-  color: #215199; 
-  margin: 4% 0;
-  text-align: center;
-  font-size: 0.85rem;
-}
+  /* larger content div  */
 
-/* larger content div  */
+  .main-content-div {
+    background-color: #f9fcff;
+    width: 100%;
+    border: 1px solid #f9fcff;
+    padding: 3% 0%;
+    margin-top: 2%;
+    text-align: center;
+    display: block;
+    border-radius: 5px;
+  }
 
-.main-content-div {
-  background-color: #f7fafd; 
-  width: 100%; 
-  padding: 3% 0%;
-  margin-top: 2%; 
-  text-align: center;
-  display: block;
-  border-radius: 5px;
-}
+  /* input group div styling */
 
-/* input group div styling */
+  .input-group-div {
+    display: block;
+    padding-top: 3%;
+    padding-bottom: 3%;
+  }
 
-.input-group-div {
-  display: block;
-  padding-top: 3%;
-  padding-bottom: 3%;
-}
+  .input-one-div {
+    display: inline-block;
+    width: 40%;
+    text-align: center;
+  }
 
-.input-one-div {
-  display: inline-block;
-  width: 40%;
-  text-align: center;
-}
+  .input-two-div {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+  }
 
-.input-two-div {
-  display: inline-block;
-  width: 50%;
-  text-align: center;
-}
+  .conj-text-div {
+    display: inline-block;
+    width: 10%;
+    text-align: center;
+  }
 
-.conj-text-div {
-  display: inline-block;
-  width: 10%;
-  text-align: center;
-}
+  /* input number field */
+  .input-number {
+    border-radius: 3px;
+    width: 13%;
+    height: 14%;
+    color: navy;
+    margin-right: 2%;
+    text-align: center;
+    display: inline-block;
+    font-size: 0.75rem;
+    border: 0.5px solid darkgray;
+  }
 
-/* input number field */
-.input-number {
-  border-radius: 3px; 
-  width: 13%; 
-  height: 16%; 
-  color: navy; 
-  margin-right: 2%;
-  text-align: center;
-  display: inline-block;
-  font-size: 0.9rem;
-  border: 0.5px solid darkgray;
-}
+  /* dropdown styling */
+  .dropdown-main-type {
+    border-radius: 3px;
+    width: 27%;
+    height: 14%;
+    font-size: 0.75rem;
+    text-align: center;
+    display: inline-block;
+    padding-left: 1%;
+    border: 0.5px solid darkgray;
+  }
 
-/* dropdown styling */
-.dropdown-main-type {
-  border-radius: 3px; 
-  width: 27%; 
-  height: 16%;
-  font-size: 0.9rem;
-  text-align: center;
-  display: inline-block;
-  padding-left: 1%;
-  border: 0.5px solid darkgray;
-}
+  .dropdown-main-lang {
+    border-radius: 3px;
+    width: 35%;
+    height: 14%;
+    font-size: 0.75rem;
+    text-align: center;
+    display: inline-block;
+    padding-left: 1%;
+    border: 0.5px solid darkgray;
+  }
 
-.dropdown-main-lang {
-  border-radius: 3px; 
-  width: 40%; 
-  height: 16%;
-  font-size: 0.9rem;
-  text-align: center;
-  display: inline-block;
-  padding-left: 1%;
-  border: 0.5px solid darkgray;
-}
+  .dropdown-item {
+    font-size: 0.75rem;
+    height: 16%;
+    padding: 1% 1%;
+  }
 
-.dropdown-item {
-  font-size: 0.9rem;
-  height: 16%;
-  padding: 1% 1%;
-}
+  .conj-text {
+    color: black;
+    margin-right: 2%;
+    margin-left: 2%;
+    margin-top: 3%;
+    font-size: 0.8rem;
+    display: inline-block;
+    text-align: center;
+  }
 
-.conj-text {
-  color: black; 
-  margin-right: 2%; 
-  margin-left: 2%; 
-  margin-top: 3%; 
-  font-size: 0.8rem; 
-  display: inline-block;
-  text-align: center;
-}
-
-/* buttons styling */
+  /* buttons styling */
 
   .button-pri {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 400;
     margin: 1.358% 0.8% 1.358%;
     padding: 1.7% 0.2%;
@@ -115,12 +115,12 @@
     border: 0.5px solid #1471fd;
     background-color: #1471fd;
     border-radius: 4px;
-    color: #FFF;
+    color: #fff;
     cursor: pointer;
   }
 
   .button-sec {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     margin: 1.358% 0.8% 1.358%;
     padding: 1.7% 0.2%;
     width: 24%;
@@ -132,18 +132,34 @@
     cursor: pointer;
   }
 
-  .button-pri:hover, .button-sec:hover {
-    background-color: #1471fd; 
-    border: 0.5px solid #1471fd;
+  .button-pri:hover {
+    background-color: #106af0;
+    border: 0.5px solid #106af0;
     color: #fff;
-    transition-duration: 0.2s;
+    transition-duration: 0.3s;
+    box-shadow: 0 2px 3px rgba(19, 103, 230, 0.2);
   }
 
-  .button-pri:active, .button-sec:active {
-    background-color: #074aaf;
-    border: 0.5px solid #074aaf;
+  .button-sec:hover {
+    border: 0.5px solid #106af0;
+    color: #106af0;
+    background-color: #fcf9f9;
+    transition-duration: 0.3s;
+    box-shadow: 0 2px 3px rgba(19, 103, 230, 0.2);
+  }
+
+  .button-pri:active {
+    background-color: #0f5bce;
+    border: 0.5px solid #0f5bce;
     color: #fff;
-    transition-duration: 0.2s;
+    transition-duration: 0.3s;
+    box-shadow: none;
+  }
+
+  .button-sec:active {
+    border: 0.5px solid #106af0;
+    color: #106af0;
+    background-color: #f7f4f4;
     box-shadow: none;
   }
 
@@ -154,148 +170,163 @@
     margin: 3% 0;
   }
 
-
   /* Footer styling */
 
-.credit-text {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.65rem;
-  color: rgb(183, 201, 235);
-  /* color: #7D7D7D; */
-  margin: 2% 0 0;
-  text-align: right;
-  display: inline-block;
-  padding-left: 0;
-}
+  .bottomContainer {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 3.49%;
+    position: fixed;
+    width: 100%;
+    display: block;
+    padding-left: 1%;
+  }
 
-a:link, a:visited {
-  color: rgb(211, 218, 233);
-  /* color: #7D7D7D; */
-  cursor: pointer;
-  text-decoration: none;
-}
+  .bottomItem {
+    height: 7%;
+    margin: auto;
+    width: 100%;
+    display: inline-block;
+  }
 
-a:hover {
-  color: rgb(108, 125, 155);
-}
+  .disclaimer-text {
+    border: none;
+    font-size: 0.6rem;
+    text-align: left;
+    background-color: rgb(253, 253, 253, 0);
+    color: rgb(158, 171, 196);
+    cursor: pointer;
+    padding-left: 2%;
+  }
 
-.bottomContainer{
-  background: none repeat scroll 0 0 transparent;
-  bottom: 3.49%;
-  position: fixed;
-  width: 100%;
-  display: block;
-  padding-left: 2%;
-}
+  .disclaimer-text:hover {
+    color: rgb(108, 125, 155);
+    transition-duration: 0.3s;
+  }
 
-.bottomItem{
-  height: 7%;
-  margin: auto;
-  width: 100%;
-  display: inline-block;
-}
+  .blank-space-in-footer {
+    display: inline-block;
+    width: 71%;
+  }
 
-.disclaimer-text {
-  border: none;
-  font-size: 0.65rem;
-  text-align: left;
-  background-color: rgb(253, 253, 253, 0);
-  color: rgb(211, 218, 233);
-  /* color: #7D7D7D; */
-  cursor: pointer;
-  
-}
+  .credit-text {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9rem;
+    color: rgb(158, 171, 196);
+    margin: 2% 0 0;
+    text-align: right;
+    display: inline-block;
+    padding-left: 0;
+  }
 
-.disclaimer-text:hover {
-  color: rgb(108, 125, 155);
-}
+  a:link,
+  a:visited {
+    color: rgb(158, 171, 196);
+    cursor: pointer;
+    text-decoration: none;
+    opacity: 0.45;
+  }
 
-
-.blank-space-in-footer {
-  display: inline-block;
-  width: 48%;
-}
-
+  a:hover {
+    color: rgb(221, 41, 41);
+    opacity: 0.8;
+    transition-duration: 0.3s;
+  }
 
 </style>
 
-      <p class="head-label"> Generate random text in Indian languages</p>
+<p class="head-label">Generate random text in Indian languages</p>
 
-      <div class="main-content-div">
+<div class="main-content-div">
+  <div class="input-group-div">
+    <input class="input-number" type="number" id="inputBox" value="5" />
+    <select class="dropdown-main-type" id="type" name="">
+      <option id="words" class="dropdown-item" value="words">Words</option>
+      <option id="sent" class="dropdown-item" value="sentences" selected>
+        Sentences
+      </option>
+      <option id="para" class="dropdown-item" value="paragraphs">
+        Paragraphs
+      </option>
+    </select>
 
-        <div class="input-group-div">
+    <p class="conj-text">in</p>
 
+    <select class="dropdown-main-lang" id="language" name="">
+      <option id="hi" class="dropdown-item" value="Hindi" selected>
+        Hindi (हिंदी)
+      </option>
+      <option id="sa" class="dropdown-item" value="Sanskrit">
+        Sanskrit (संस्कृतम्)
+      </option>
+      <option id="mr" class="dropdown-item" value="Marathi">
+        Marathi (मराठी)
+      </option>
+      <option id="kn" class="dropdown-item" value="Kannada">
+        Kannada (ಕನ್ನಡ)
+      </option>
+      <option id="ta" class="dropdown-item" value="Tamil">Tamil (தமிழ்)</option>
+      <option id="te" class="dropdown-item" value="Telugu">
+        Telugu (తెలుగు)
+      </option>
+      <option id="ba" class="dropdown-item" value="Bangla">
+        Bangla (বাংলা)
+      </option>
+      <option id="gu" class="dropdown-item" value="Gujarati">
+        Gujarati (ગુજરાતી)
+      </option>
+      <option id="ma" class="dropdown-item" value="Malayalam">
+        Malayalam (മലയാളം)
+      </option>
+      <option id="od" class="dropdown-item" value="Odia">Odia (ଓଡ଼ିଆ)</option>
+      <option id="pa" class="dropdown-item" value="Punjabi">
+        Punjabi (ਪੰਜਾਬੀ)
+      </option>
+    </select>
+  </div>
+</div>
 
-            <input class="input-number" type="number" id="inputBox" value="5">
-            <select class="dropdown-main-type" id="type" name="">
-              <option id="words" class="dropdown-item" value="words">Words</option>
-              <option id="sent" class="dropdown-item" value="sentences" selected>Sentences</option>
-              <option id="para" class="dropdown-item" value="paragraphs">Paragraphs</option>
-            </select>
+<div class="buttons-div">
+  <button class="button-pri" id="getDesiIpsum">Generate</button>
+  <button class="button-sec" id="close">Cancel</button>
+</div>
 
-
-
-            <p class="conj-text">in</p>
-
-
-
-            <select class="dropdown-main-lang" id="language" name="">
-              <option id="hi" class="dropdown-item" value="Hindi" selected>Hindi (हिंदी)</option>
-              <option id="sa" class="dropdown-item" value="Sanskrit">Sanskrit (संस्कृतम्)</option>
-              <option id="mr" class="dropdown-item" value="Marathi">Marathi (मराठी)</option>
-              <option id="kn" class="dropdown-item" value="Kannada">Kannada (ಕನ್ನಡ)</option>
-              <option id="ta" class="dropdown-item" value="Tamil">Tamil (தமிழ்)</option>
-              <option id="te" class="dropdown-item" value="Telugu">Telugu (తెలుగు)</option>
-              <option id="ba" class="dropdown-item" value="Bangla">Bangla (বাংলা)</option>
-              <option id="gu" class="dropdown-item" value="Gujarati">Gujarati (ગુજરાતી)</option>
-              <option id="ma" class="dropdown-item" value="Malayalam">Malayalam (മലയാളം)</option>
-              <option id="od" class="dropdown-item" value="Odia">Odia (ଓଡ଼ିଆ)</option>
-              <option id="pa" class="dropdown-item" value="Punjabi">Punjabi (ਪੰਜਾਬੀ)</option>
-            </select>
-   
-        </div>
-
-      </div>
-
-      <div class="buttons-div">
-        <button class="button-pri" id="getDesiIpsum">Generate</button>
-        <button class="button-sec" id="close">Cancel</button>
-      </div>
-
-
-      <!-- Created a container at bottom to hold two elements at fixed position and at center. Added class in style for handling it -->
-      <div class="bottomContainer">
-        <footer class="bottomItem">
-          <button class="disclaimer-text" id="disclaimer" >Disclaimer notice</button>
-          <div class="blank-space-in-footer"></div>
-          <p class="credit-text"><a href="https://twitter.com/abhichirde" target="_blank">by Abhijit Chirde</a></p> 
-          
-        </footer>
-      </div>
-      
-  
-
+<!-- Created a container at bottom to hold two elements at fixed position and at center. Added class in style for handling it -->
+<div class="bottomContainer">
+  <footer class="bottomItem">
+    <button class="disclaimer-text" id="disclaimer">Disclaimer</button>
+    <div class="blank-space-in-footer"></div>
+    <p class="credit-text">
+      <a href="https://twitter.com/abhichirde" target="_blank">♥️</a>
+    </p>
+  </footer>
+</div>
 
 <script>
-
   //This code block is working! Getting all three inputs in TS file
-  document.getElementById('getDesiIpsum').onclick = () => {
-    const inputNumber = document.getElementById('inputBox');
+  document.getElementById("getDesiIpsum").onclick = () => {
+    const inputNumber = document.getElementById("inputBox");
     const inputValue = inputNumber.value;
-    const type = document.getElementById('type').selectedOptions;
+    const type = document.getElementById("type").selectedOptions;
     const typeInput = type[0].value;
-    const language = document.getElementById('language').selectedOptions;
+    const language = document.getElementById("language").selectedOptions;
     const languageInput = language[0].value;
-    const checkBox = document.getElementById('close').checked;
-    parent.postMessage({ pluginMessage: { type: 'get-desi-ipsum', data: {inputValue, languageInput, typeInput}}}, '*');
-  }
+    const checkBox = document.getElementById("close").checked;
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: "get-desi-ipsum",
+          data: { inputValue, languageInput, typeInput },
+        },
+      },
+      "*"
+    );
+  };
 
-  document.getElementById('close').onclick = () => {
-    parent.postMessage({ pluginMessage: {type: 'cancel'} },'*')
-  }
+  document.getElementById("close").onclick = () => {
+    parent.postMessage({ pluginMessage: { type: "cancel" } }, "*");
+  };
 
-  document.getElementById('disclaimer').onclick = () => {
-    parent.postMessage({ pluginMessage: {type: 'disclaimer'} },'*')
-  }
-
+  document.getElementById("disclaimer").onclick = () => {
+    parent.postMessage({ pluginMessage: { type: "disclaimer" } }, "*");
+  };
 </script>
