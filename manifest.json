@@ -2,9 +2,10 @@
   "name": "Desi Ipsum",
   "id": "1047585682551481419",
   "api": "1.0.0",
-  "main": "code.min.js",
-  "editorType": [
-    "figma"
-  ],
-  "ui": "ui.html"
+  "main": "dist/code.js",
+  "ui": "dist/ui.html",
+  "editorType": ["figma", "figjam"],
+  "networkAccess": {
+    "allowedDomains": ["none"]
+  }
 }
