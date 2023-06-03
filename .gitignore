@@ -1,2 +1,9 @@
 #Ignoring source files, default Figma readme, and node_modules
-#ADDED ALL THE FILES TO GITHUB
+#ADDED ALL THE FILES TO GITHUB# Node
+*.log
+*.log.*
+node_modules
+
+out/
+dist/
+code.js
