@@ -23,7 +23,7 @@ const Inputs = ({ onInput }: InputProps) => {
   return (
     <>
       <div className="content-div">
-        <p className="head-label">I want to generate</p>
+        <p className="section-label">Generate</p>
         <div className="input-group-div">
           <input
             className="input-number"

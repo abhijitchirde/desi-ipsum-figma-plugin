@@ -11,9 +11,28 @@ body {
   gap: 1rem;
 }
 
+/* Page heading */
+.heading-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0.8rem 0;
+}
+
+.heading-text {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #0f5bce;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
 /* Heading styling */
 
-.head-label {
+.section-label {
   color: #567fbd;
   font-size: 0.85rem;
   text-align: center;
@@ -24,11 +43,9 @@ body {
 /* larger content div  */
 
 .content-div {
+  /* background-color: #85b7e8; */
   background-color: #f9fcff;
-  width: 100%;
-  border: none;
-  padding: 0;
-  margin: 0;
+  border: 1px solid #dcedff;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -36,7 +53,7 @@ body {
   border-radius: 5px;
   gap: 1rem;
   padding: 1rem 0;
-  margin: 1rem 0;
+  margin: 0.6rem 0.6rem;
 }
 
 /* Input components group */
@@ -52,12 +69,12 @@ body {
 .input-number {
   border-radius: 3px;
   width: 4rem;
-  height: 2rem;
+  height: 1.7rem;
   color: navy;
   margin-right: 2%;
   text-align: center;
   display: inline-block;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: normal;
   border: 0.5px solid darkgray;
 }
@@ -66,8 +83,8 @@ body {
 select {
   border-radius: 3px;
   width: 11rem;
-  height: 2rem;
-  font-size: 1rem;
+  height: 1.7rem;
+  font-size: 0.8rem;
   font-weight: normal;
   text-align: left;
   display: inline-block;
@@ -78,10 +95,10 @@ select {
 /* buttons styling */
 
 .button-pri {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 400;
   padding: 0.3rem;
-  width: 10rem;
+  width: 9rem;
   border: 0.5px solid #1471fd;
   background-color: #1471fd;
   border-radius: 3px;
@@ -126,7 +143,7 @@ select {
 
 .disclaimer-text {
   border: none;
-  font-size: 0.75rem;
+  font-size: 0.6rem;
   background: none;
   color: rgb(158, 171, 196);
   cursor: pointer;
@@ -139,7 +156,7 @@ select {
 }
 
 .credit-text {
-  font-size: 0.75rem;
+  font-size: 0.6rem;
   color: rgb(158, 171, 196);
   display: inline-block;
 }

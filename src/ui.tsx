@@ -4,6 +4,7 @@ import "./ui.css";
 import Inputs from "./components/Inputs";
 import Buttons from "./components/Buttons";
 import BottomSection from "./components/BottomSection";
+import PageHeading from "./components/PageHeading";
 
 declare function require(path: string): any;
 
@@ -28,6 +29,7 @@ function App() {
 
   return (
     <main>
+      <PageHeading content="Desi Ipsum" />
       <Inputs onInput={getInput} />
 
       <Buttons onClick={onGenerate} />

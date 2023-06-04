@@ -15,7 +15,7 @@ function loadFont() {
 
 loadFont();
 
-figma.showUI(__html__, { width: 375, height: 435 });
+figma.showUI(__html__, { width: 350, height: 490 });
 
 //language specific punctuation marks
 const punctSetOne = [".", ","]; //Marathi, Kannada, Tamil, Gujarati, Telugu, Malayalam
