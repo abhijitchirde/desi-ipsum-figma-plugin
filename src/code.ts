@@ -15,7 +15,7 @@ function loadFont() {
 
 loadFont();
 
-figma.showUI(__html__, { width: 350, height: 490 });
+figma.showUI(__html__, { width: 350, height: 545 });
 
 //language specific punctuation marks
 const punctSetOne = [".", ","]; //Marathi, Kannada, Tamil, Gujarati, Telugu, Malayalam
@@ -155,6 +155,19 @@ function generateSentences(
       } else {
         outputText +=
           generateWords(inputArray, randomInt(4, 9)) + punctSetThree[1] + " ";
+      }
+    }
+  } else if (language === "Lorem") {
+    let firstWord = inputArray[Math.floor(Math.random() * inputArray.length)];
+    firstWord = firstWord.charAt(0).toUpperCase();
+    outputText = firstWord;
+    for (let j = 0; j < noOfSentences; j++) {
+      if (j === noOfSentences - 1) {
+        outputText +=
+          generateWords(inputArray, randomInt(4, 9)) + punctSetOne[0];
+      } else {
+        outputText +=
+          generateWords(inputArray, randomInt(4, 9)) + punctSetOne[0] + " ";
       }
     }
   } else {

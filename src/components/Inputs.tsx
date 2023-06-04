@@ -7,7 +7,7 @@ interface InputProps {
 const Inputs = ({ onInput }: InputProps) => {
   const [input, setInput] = React.useState({
     num: 5,
-    block: "words",
+    block: "sentences",
   });
 
   const handleChange = (e) => {

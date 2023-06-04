@@ -5,14 +5,15 @@ import Inputs from "./components/Inputs";
 import Buttons from "./components/Buttons";
 import BottomSection from "./components/BottomSection";
 import PageHeading from "./components/PageHeading";
+import LoremIpsum from "./components/LoremIpsum";
 
 declare function require(path: string): any;
 
 function App() {
-  var inputCopy = { num: 5, lang: "Hindi", block: "words" };
+  var inputCopy = { num: 5, block: "sentences" };
 
   const getInput = (val) => {
-    inputCopy = { num: val.num, lang: val.lang, block: val.block };
+    inputCopy = { num: val.num, block: val.block };
   };
 
   const onGenerate = (lang) => {
@@ -33,6 +34,7 @@ function App() {
       <Inputs onInput={getInput} />
 
       <Buttons onClick={onGenerate} />
+      <LoremIpsum onClick={onGenerate} />
 
       <BottomSection />
     </main>
