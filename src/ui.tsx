@@ -5,7 +5,6 @@ import Inputs from "./components/Inputs";
 import Buttons from "./components/Buttons";
 import BottomSection from "./components/BottomSection";
 import PageHeading from "./components/PageHeading";
-import LoremIpsum from "./components/LoremIpsum";
 
 declare function require(path: string): any;
 
@@ -34,7 +33,6 @@ function App() {
       <Inputs onInput={getInput} />
 
       <Buttons onClick={onGenerate} />
-      <LoremIpsum onClick={onGenerate} />
 
       <BottomSection />
     </main>

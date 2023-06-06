@@ -16,7 +16,7 @@ const BottomSection = () => {
 
       <p className="credit-text">
         <a href="https://abhijitchirde.com" target="_blank">
-          <span className="heart">❤️ </span> from Abhijit
+          by Abhijit
         </a>
       </p>
     </div>
