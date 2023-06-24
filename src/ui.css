@@ -1,0 +1,179 @@
+/* Plugin body */
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Page heading */
+.heading-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0.4rem 0;
+}
+
+.heading-text {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #0049d8;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+/* Heading styling */
+
+.section-label {
+  color: #567fbd;
+  font-size: 0.85rem;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* larger content div  */
+
+.content-div {
+  /* background-color: #85b7e8; */
+  background-color: #f9fcff;
+  border: 1px solid #dcedff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 5px;
+  gap: 0.5rem;
+  padding: 0.8rem 0;
+  margin: 0.6rem 0.6rem;
+}
+
+/* Input components group */
+
+.input-group-div {
+  display: flex;
+  direction: row;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+/* input number field */
+.input-number {
+  border-radius: 3px;
+  width: 3.3rem;
+  height: 1.7rem;
+  color: navy;
+  margin-right: 2%;
+  text-align: center;
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: normal;
+  border: 0.5px solid darkgray;
+}
+
+/* dropdown styling */
+select {
+  border-radius: 3px;
+  width: 11rem;
+  height: 1.7rem;
+  font-size: 0.8rem;
+  font-weight: normal;
+  text-align: left;
+  display: inline-block;
+  border: 0.5px solid darkgray;
+  padding: 0 0.5rem;
+}
+
+/* buttons styling */
+
+.button-pri {
+  font-size: 0.6rem;
+  font-weight: 400;
+  padding: 0.3rem;
+  height: 1.5rem;
+  width: 7.4rem;
+  border: 0.5px solid #1471fd;
+  background-color: #1471fd;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 3px rgba(19, 103, 230, 0.2);
+}
+
+.button-pri:hover {
+  background-color: #458fff;
+  border: 0.5px solid #458fff;
+  color: #fff;
+  transition-duration: 0.1s;
+}
+
+.button-pri:active {
+  background-color: #0f5bce;
+  border: 0.5px solid #0f5bce;
+  color: #fff;
+  transition-duration: 0.1s;
+  box-shadow: none;
+}
+
+.buttons-div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  width: 100%;
+  justify-content: center;
+}
+
+/* Footer styling */
+
+.bottomContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.disclaimer-text {
+  border: none;
+  font-size: 0.6rem;
+  background: none;
+  color: rgb(158, 171, 196);
+  cursor: pointer;
+  display: inline-block;
+  padding: 0;
+}
+
+.disclaimer-text:hover {
+  color: rgb(108, 125, 155);
+  transition-duration: 0.1s;
+}
+
+.credit-text {
+  font-size: 0.6rem;
+  color: rgb(158, 171, 196);
+  display: inline-block;
+}
+
+a:link,
+a:visited {
+  color: rgb(158, 171, 196);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(108, 125, 155);
+  transition-duration: 0.3s;
+}
+
+.heart {
+  opacity: 0.4;
+}
