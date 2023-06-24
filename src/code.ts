@@ -1,3 +1,6 @@
+//Made by Abhijit Chirde
+//abhijitchirde.com
+
 import { wordSpace } from "./data/wordSpace";
 
 const fonts = [
@@ -15,7 +18,7 @@ function loadFont() {
 
 loadFont();
 
-figma.showUI(__html__, { width: 330, height: 450 });
+figma.showUI(__html__, { width: 290, height: 425 });
 
 //language specific punctuation marks
 const punctSetOne = [".", ","]; //Marathi, Kannada, Tamil, Gujarati, Telugu, Malayalam
@@ -77,7 +80,7 @@ figma.ui.onmessage = (msg) => {
   if (msg.type === "disclaimer") {
     figma.notify(
       "This plugin generates random text without carrying any literal meaning.",
-      { timeout: 3000 }
+      { timeout: 2000 }
     );
   }
 };
