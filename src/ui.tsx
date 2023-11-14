@@ -29,7 +29,7 @@ function App() {
 
   return (
     <main>
-      <PageHeading content="Desi Ipsum" />
+      {/* <PageHeading content="Desi Ipsum" /> */}
       <Inputs onInput={getInput} />
 
       <Buttons onClick={onGenerate} />
