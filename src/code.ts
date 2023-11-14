@@ -18,7 +18,7 @@ function loadFont() {
 
 loadFont();
 
-figma.showUI(__html__, { width: 290, height: 425 });
+figma.showUI(__html__, { width: 320, height: 410 });
 
 //language specific punctuation marks
 const punctSetOne = [".", ","]; //Marathi, Kannada, Tamil, Gujarati, Telugu, Malayalam
@@ -79,7 +79,7 @@ figma.ui.onmessage = (msg) => {
 
   if (msg.type === "disclaimer") {
     figma.notify(
-      "This plugin generates random text without carrying any literal meaning.",
+      "This plugin generates random text without any literal meaning.",
       { timeout: 2000 }
     );
   }
