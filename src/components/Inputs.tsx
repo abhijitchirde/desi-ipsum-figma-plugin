@@ -30,7 +30,7 @@ const Inputs = ({ onInput }: InputProps) => {
             type="number"
             id="inputBox"
             value={input.num}
-            min="0"
+            min="1"
             onInput={handleChange}
             name="num"
           />
