@@ -18,7 +18,7 @@ function loadFont() {
 
 loadFont();
 
-figma.showUI(__html__, { width: 320, height: 410 });
+figma.showUI(__html__, { width: 240, height: 410 });
 
 //language specific punctuation marks
 const punctSetOne = [".", ","]; //Marathi, Kannada, Tamil, Gujarati, Telugu, Malayalam
@@ -82,6 +82,26 @@ figma.ui.onmessage = (msg) => {
       "This plugin generates random text without any literal meaning.",
       { timeout: 2000 }
     );
+  }
+
+  // Handle theme requests
+  if (msg.type === "get-theme") {
+    // For now, default to light theme since Figma doesn't expose theme directly
+    // In a real implementation, you might want to detect this from the UI context
+    const currentTheme = "light";
+    figma.ui.postMessage({
+      pluginMessage: {
+        type: "theme-changed",
+        theme: currentTheme,
+      },
+    });
+  }
+
+  // Handle theme change notifications
+  if (msg.type === "theme-changed") {
+    // Store the theme preference if needed
+    // This is optional but can be useful for persistence
+    console.log("Theme changed to:", msg.theme);
   }
 };
 

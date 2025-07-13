@@ -10,7 +10,7 @@ const LangButton = ({ name, inScript, action }: LangProps) => {
   return (
     <>
       <button className="button-pri" value={name} onClick={action}>
-        {name} ({inScript})
+        {name} {/* ({inScript}) */}
       </button>
     </>
   );
