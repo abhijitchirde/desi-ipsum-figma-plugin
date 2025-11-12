@@ -6,9 +6,9 @@
   "ui": "dist/ui.html",
   "capabilities": [],
   "enableProposedApi": false,
-  "editorType": ["figma", "figjam"],
+  "editorType": ["figma", "figjam", "buzz", "slides"],
   "networkAccess": {
     "allowedDomains": ["none"]
   },
-  "documentAccess":"dynamic-page"
+  "documentAccess": "dynamic-page"
 }
