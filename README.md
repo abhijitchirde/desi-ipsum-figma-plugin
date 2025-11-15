@@ -34,8 +34,7 @@ _More languages coming soon!_
 1. **Run the plugin** from the Figma menu or plugins panel
 2. **Select one or more text layers** on your canvas where you want to add generated text
 3. **Enter the number** and **select the type** of text block (Words, Sentences, or Paragraphs)
-4. **Choose your language** from the dropdown list
-5. **Click 'Generate'** to instantly fill your selected layers with unique "Desi Ipsum" text
+4. **Click on the Language** from which you want to generate
 
 ---
 
