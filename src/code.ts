@@ -2,219 +2,158 @@
 //abhijitchirde.com
 
 import { wordSpace } from "./data/wordSpace";
+import { LANGUAGES, LanguageConfig, MAX_COUNT, Unit, UNITS, getLanguage } from "./data/languages";
+import { generateText } from "./generator";
 
-const fonts = [
-  { family: "Hind", style: "Regular" },
-  { family: "Baloo Bhaina 2", style: "Regular" },
-  { family: "Mukta Mahee", style: "Regular" },
-  { family: "Mukta", style: "Regular" },
-];
+const words = wordSpace as Record<string, string[]>;
 
-function loadFont() {
-  fonts.forEach((font) => {
-    figma.loadFontAsync(font);
-  });
+figma.showUI(__html__, { width: 240, height: 505, themeColors: true });
+
+// ---------- Fonts ----------
+
+// One load attempt per font; resolves to false instead of throwing if the font isn't available.
+const fontLoads = new Map<string, Promise<boolean>>();
+
+function tryLoadFont(font: FontName): Promise<boolean> {
+  const key = `${font.family}::${font.style}`;
+  let load = fontLoads.get(key);
+  if (!load) {
+    load = figma.loadFontAsync(font).then(
+      () => true,
+      () => false
+    );
+    fontLoads.set(key, load);
+  }
+  return load;
 }
 
-loadFont();
+// Warm up the Regular weights so the first click is fast.
+LANGUAGES.forEach((lang) => {
+  if (lang.font) tryLoadFont(lang.font);
+});
 
-figma.showUI(__html__, { width: 240, height: 410 });
+/** Loads every font currently used in the node, which is needed before changing its characters. */
+async function loadNodeFonts(node: TextNode) {
+  const fonts =
+    node.characters.length > 0
+      ? node.getRangeAllFontNames(0, node.characters.length)
+      : [node.fontName as FontName];
+  await Promise.all(fonts.map((font) => figma.loadFontAsync(font)));
+}
 
-//language specific punctuation marks
-const punctSetOne = [".", ","]; //Marathi, Kannada, Tamil, Gujarati, Telugu, Malayalam
-const punctSetTwo = ["।", ","]; //Hindi, Bangla, Odia, Punjabi
-const punctSetThree = ["।।", "।"]; //Sanskrit
+function currentStyle(node: TextNode): string {
+  const font = node.characters.length > 0 ? node.getRangeFontName(0, 1) : node.fontName;
+  return font === figma.mixed ? "Regular" : font.style;
+}
 
-figma.ui.onmessage = (msg) => {
-  if (msg.type === "get-desi-ipsum") {
-    const inputNum = parseInt(msg.data.num, 10);
-    // const inputNum = msg.data.inputNum;
-    const typeInput = msg.data.block;
-    const languageInput = msg.data.lang;
+/**
+ * Applies the language font, keeping the layer's style (e.g. Bold) when the family has it.
+ * If the family can't be loaded at all, the layer keeps its current font.
+ */
+async function applyFont(node: TextNode, lang: LanguageConfig) {
+  if (lang.font) {
+    const style = currentStyle(node);
+    const candidates: FontName[] = [{ family: lang.font.family, style }];
+    if (style !== lang.font.style) candidates.push(lang.font);
 
-    if (figma.currentPage.selection.length === 0) {
-      figma.notify("Please select a text layer", { timeout: 1500 });
-    }
-
-    for (const node of figma.currentPage.selection) {
-      if (node.type !== "TEXT") {
-        figma.notify("Please select a text layer", { timeout: 1000 });
-      } else if (isNaN(inputNum)) {
-        figma.notify("Please enter a number", { timeout: 1000 });
-      } else if (inputNum <= 0) {
-        figma.notify("Please enter a number greater than 0", { timeout: 1000 });
-      } else if (node.type === "TEXT") {
-        figma.ui.postMessage({ error: "TextLayer" });
-
-        setNodeFont(node, languageInput);
-
-        node.name = `${languageInput} text`;
-
-        if (typeInput === "words") {
-          node.characters = generateWords(
-            wordSpace[`${languageInput}`],
-            inputNum
-          );
-          if (msg.data.checkBox === true) {
-            figma.closePlugin(
-              `Generated ${inputNum} ${typeInput} of ${languageInput}.`
-            );
-          }
-        } else if (typeInput === "sentences") {
-          node.characters = generateSentences(
-            wordSpace[`${languageInput}`],
-            inputNum,
-            languageInput
-          );
-        } else {
-          node.characters = generateParagraphs(
-            wordSpace[`${languageInput}`],
-            inputNum,
-            languageInput
-          );
-        }
+    for (const font of candidates) {
+      if (await tryLoadFont(font)) {
+        node.fontName = font;
+        return;
       }
     }
+  }
+  await loadNodeFonts(node);
+}
+
+// ---------- Layer naming ----------
+
+const LAYER_SUFFIX = " text";
+const pluginLayerNames = new Set(LANGUAGES.map((lang) => lang.label + LAYER_SUFFIX));
+
+/** Rename only layers that are auto-named or were named by this plugin. */
+function maybeRename(node: TextNode, lang: LanguageConfig, wasAutoNamed: boolean) {
+  if (wasAutoNamed || pluginLayerNames.has(node.name)) {
+    node.name = lang.label + LAYER_SUFFIX;
+  }
+}
+
+// ---------- Generate ----------
+
+interface GenerateRequest {
+  num: unknown;
+  block: unknown;
+  lang: unknown;
+}
+
+function notify(message: string) {
+  figma.notify(message, { timeout: 1500 });
+}
+
+function plural(n: number, word: string) {
+  return `${n} ${word}${n === 1 ? "" : "s"}`;
+}
+
+async function handleGenerate(data: GenerateRequest) {
+  const lang = getLanguage(String(data.lang));
+  if (!lang || !words[lang.id]) return notify("Unknown language");
+
+  const unit = String(data.block) as Unit;
+  if (UNITS.indexOf(unit) === -1) return notify("Please choose words, sentences or paragraphs");
+
+  const count = parseInt(String(data.num), 10);
+  if (isNaN(count)) return notify("Please enter a number");
+  if (count <= 0) return notify("Please enter a number greater than 0");
+  if (count > MAX_COUNT[unit]) return notify(`Please enter at most ${MAX_COUNT[unit]} ${unit}`);
+
+  const selection = figma.currentPage.selection;
+  const textNodes = selection.filter((node): node is TextNode => node.type === "TEXT");
+  if (textNodes.length === 0) return notify("Please select a text layer");
+
+  let filled = 0;
+  let failed = 0;
+  let openingUsed = false;
+
+  for (const node of textNodes) {
+    try {
+      if (node.hasMissingFont) {
+        failed++;
+        continue;
+      }
+      const wasAutoNamed = node.autoRename;
+      await applyFont(node, lang);
+      node.characters = generateText({
+        words: words[lang.id],
+        lang,
+        unit,
+        count,
+        // Only the first filled layer gets the classic "Lorem ipsum dolor sit amet…" opening.
+        classicOpening: lang.group === "classic" && !openingUsed,
+      });
+      openingUsed = true;
+      maybeRename(node, lang, wasAutoNamed);
+      filled++;
+    } catch (error) {
+      console.error("Desi Ipsum: could not fill layer", node.name, error);
+      failed++;
+    }
+  }
+
+  const skipped = selection.length - textNodes.length;
+  if (skipped > 0 || failed > 0) {
+    const parts = [`Filled ${plural(filled, "text layer")}`];
+    if (skipped > 0) parts.push(`skipped ${plural(skipped, "non-text layer")}`);
+    if (failed > 0) parts.push(`${failed} couldn't be edited (missing font?)`);
+    notify(parts.join(" · "));
+  }
+}
+
+figma.ui.onmessage = async (msg) => {
+  if (msg.type === "get-desi-ipsum") {
+    await handleGenerate(msg.data ?? {});
   }
 
   if (msg.type === "disclaimer") {
-    figma.notify(
-      "This plugin generates random text without any literal meaning.",
-      { timeout: 2000 }
-    );
-  }
-
-  // Handle theme requests
-  if (msg.type === "get-theme") {
-    // For now, default to light theme since Figma doesn't expose theme directly
-    // In a real implementation, you might want to detect this from the UI context
-    const currentTheme = "light";
-    figma.ui.postMessage({
-      pluginMessage: {
-        type: "theme-changed",
-        theme: currentTheme,
-      },
-    });
-  }
-
-  // Handle theme change notifications
-  if (msg.type === "theme-changed") {
-    // Store the theme preference if needed
-    // This is optional but can be useful for persistence
-    console.log("Theme changed to:", msg.theme);
+    figma.notify("This plugin generates random text without any literal meaning.", { timeout: 2000 });
   }
 };
-
-//function for setting fonts depending on languages
-function setNodeFont(currentNode: TextNode, language: string) {
-  if (language === "Odia") {
-    currentNode.fontName = {
-      family: "Baloo Bhaina 2",
-      style: "Regular",
-    };
-  } else if (language === "Punjabi") {
-    currentNode.fontName = {
-      family: "Mukta Mahee",
-      style: "Regular",
-    };
-  } else if (
-    language === "Marathi" ||
-    language === "Hindi" ||
-    language === "Sanskrit"
-  ) {
-    currentNode.fontName = {
-      family: "Mukta",
-      style: "Regular",
-    };
-  } else {
-    currentNode.fontName = {
-      family: "Hind",
-      style: "Regular",
-    };
-  }
-}
-
-//Function to generate words
-function generateWords(inputArray: Array<string>, noOfWords: number) {
-  let outputText = "";
-  for (let i = 0; i < noOfWords; i++) {
-    let randomWords = inputArray[Math.floor(Math.random() * inputArray.length)];
-    if (i === noOfWords - 1) {
-      outputText += `${randomWords}`;
-    } else {
-      outputText += `${randomWords} `;
-    }
-  }
-  return outputText;
-}
-
-//Function to generate sentences
-function generateSentences(
-  inputArray: Array<string>,
-  noOfSentences: number,
-  language: string
-) {
-  let outputText = "";
-  if (
-    language === "Hindi" ||
-    language === "Bangla" ||
-    language === "Odia" ||
-    language === "Punjabi"
-  ) {
-    for (let i = 0; i < noOfSentences; i++) {
-      if (i === noOfSentences - 1) {
-        outputText +=
-          generateWords(inputArray, randomInt(4, 9)) + punctSetTwo[0];
-      } else {
-        outputText +=
-          generateWords(inputArray, randomInt(4, 9)) + punctSetTwo[0] + " ";
-      }
-    }
-  } else if (language === "Sanskrit") {
-    for (let j = 0; j < noOfSentences; j++) {
-      if (j === noOfSentences - 1) {
-        outputText +=
-          generateWords(inputArray, randomInt(4, 9)) + punctSetThree[0];
-      } else {
-        outputText +=
-          generateWords(inputArray, randomInt(4, 9)) + punctSetThree[1] + " ";
-      }
-    }
-  } else {
-    for (let j = 0; j < noOfSentences; j++) {
-      if (j === noOfSentences - 1) {
-        outputText +=
-          generateWords(inputArray, randomInt(4, 9)) + punctSetOne[0];
-      } else {
-        outputText +=
-          generateWords(inputArray, randomInt(4, 9)) + punctSetOne[0] + " ";
-      }
-    }
-  }
-  return outputText;
-}
-
-//Function to generate paragraphs
-function generateParagraphs(
-  inputArray: Array<string>,
-  noOfParagraphs: number,
-  language: string
-) {
-  let outputText = "";
-  for (let k = 0; k < noOfParagraphs; k++) {
-    if (k == noOfParagraphs - 1) {
-      outputText += generateSentences(inputArray, randomInt(4, 8), language);
-    } else {
-      outputText +=
-        generateSentences(inputArray, randomInt(4, 8), language) + "\n" + "\n";
-    }
-  }
-  return outputText;
-}
-
-//Function to generate random integer for sent and para
-function randomInt(min: number, max: number) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}

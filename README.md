@@ -12,6 +12,7 @@ Works seamlessly across all Figma applications: Figma Design, FigJam, Figma Slid
 ## Features
 
 11 Indian Languages Supported: Generate placeholder text in Hindi, Marathi, Sanskrit, Tamil, Kannada, Telugu, Malayalam, Gujarati, Bangla, Odia, and Punjabi
+Classic Lorem Ipsum too: Need Latin placeholder text? One click gives you the standard "Lorem ipsum dolor sit amet…" text, in your layer's own font
 Flexible Text Generation: Create words, sentences, or full paragraphs based on your needs
 Uses proper script rendering and language-specific punctuation marks
 Select multiple text layers and fill them all at once with unique content

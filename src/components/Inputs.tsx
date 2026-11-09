@@ -1,60 +1,54 @@
 import * as React from "react";
+import { MAX_COUNT, Unit } from "../data/languages";
 
-interface InputProps {
-  onInput: any;
+export interface InputValues {
+  /** Kept as a string so the field can be empty while typing; validated by the plugin. */
+  num: string;
+  block: Unit;
 }
 
-const Inputs = ({ onInput }: InputProps) => {
-  const [input, setInput] = React.useState({
-    num: 5,
-    block: "sentences",
-  });
+interface InputProps {
+  value: InputValues;
+  onChange: (value: InputValues) => void;
+}
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setInput((prev) => {
-      return { ...prev, [name]: value };
-    });
-
-    onInput({ ...input, [name]: value });
-  };
-
+const Inputs = ({ value, onChange }: InputProps) => {
   return (
-    <>
-      <div className="content-div">
-        <p className="section-label">I want</p>
-        <div className="input-group-div">
-          <input
-            className="input-number"
-            type="number"
-            id="inputBox"
-            value={input.num}
-            min="1"
-            onInput={handleChange}
-            name="num"
-          />
+    <div className="content-div">
+      <p className="section-label">I want</p>
+      <div className="input-group-div">
+        <input
+          className="input-number"
+          type="number"
+          id="inputBox"
+          aria-label="How many"
+          value={value.num}
+          min={1}
+          max={MAX_COUNT[value.block]}
+          onChange={(e) => onChange({ ...value, num: e.target.value })}
+          name="num"
+        />
 
-          <select
-            className="dropdown-main-type"
-            id="type"
-            value={input.block}
-            onChange={handleChange}
-            name="block"
-          >
-            <option id="words" className="dropdown-item" value="words">
-              Words
-            </option>
-            <option id="sent" className="dropdown-item" value="sentences">
-              Sentences
-            </option>
-            <option id="para" className="dropdown-item" value="paragraphs">
-              Paragraphs
-            </option>
-          </select>
-        </div>
+        <select
+          className="dropdown-main-type"
+          id="type"
+          aria-label="Text unit"
+          value={value.block}
+          onChange={(e) => onChange({ ...value, block: e.target.value as Unit })}
+          name="block"
+        >
+          <option className="dropdown-item" value="words">
+            Words
+          </option>
+          <option className="dropdown-item" value="sentences">
+            Sentences
+          </option>
+          <option className="dropdown-item" value="paragraphs">
+            Paragraphs
+          </option>
+        </select>
       </div>
-    </>
+    </div>
   );
 };
 

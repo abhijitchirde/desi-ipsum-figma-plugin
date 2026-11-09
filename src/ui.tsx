@@ -1,26 +1,19 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import "./ui.css";
-import Inputs from "./components/Inputs";
+import Inputs, { InputValues } from "./components/Inputs";
 import Buttons from "./components/Buttons";
 import BottomSection from "./components/BottomSection";
-import PageHeading from "./components/PageHeading";
-
-declare function require(path: string): any;
 
 function App() {
-  var inputCopy = { num: 5, block: "sentences" };
+  const [input, setInput] = React.useState<InputValues>({ num: "5", block: "sentences" });
 
-  const getInput = (val) => {
-    inputCopy = { num: val.num, block: val.block };
-  };
-
-  const onGenerate = (lang) => {
+  const onGenerate = (lang: string) => {
     parent.postMessage(
       {
         pluginMessage: {
           type: "get-desi-ipsum",
-          data: { ...inputCopy, lang: lang },
+          data: { num: input.num, block: input.block, lang },
         },
       },
       "*"
@@ -29,9 +22,7 @@ function App() {
 
   return (
     <main>
-      {/* <PageHeading content="Desi Ipsum" /> */}
-
-      <Inputs onInput={getInput} />
+      <Inputs value={input} onChange={setInput} />
 
       <Buttons onClick={onGenerate} />
 
@@ -40,4 +31,4 @@ function App() {
   );
 }
 
-ReactDOM.createRoot(document.getElementById("react-page")).render(<App />);
+ReactDOM.createRoot(document.getElementById("react-page")!).render(<App />);

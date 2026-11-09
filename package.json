@@ -11,7 +11,7 @@
   "author": "Abhijit Chirde",
   "license": "MIT",
   "devDependencies": {
-    "@figma/plugin-typings": "*",
+    "@figma/plugin-typings": "^1.142.0",
     "@types/node": "^22.7.9",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",

@@ -20,10 +20,14 @@ This document outlines the design system implementation for the Desi Ipsum Figma
 
 The design system uses CSS custom properties (CSS variables) to maintain consistency across light and dark themes.
 
-#### Light Theme Variables
+The real values come from Figma. `figma.showUI(__html__, { themeColors: true })` injects Figma's own `--figma-color-*` variables for the user's current light or dark theme, so the UI always matches Figma.
+
+#### Fallback Values
+
+`src/ui.css` defines light fallbacks inside `:where(:root)`. `:where()` has zero specificity, so Figma's injected values always win. The fallbacks only apply outside Figma (e.g. opening `ui.html` in a browser).
 
 ```css
-:root {
+:where(:root) {
   --figma-color-bg: #ffffff; /* Primary background */
   --figma-color-bg-secondary: #f5f5f5; /* Secondary background */
   --figma-color-text: #000000; /* Primary text */
@@ -38,23 +42,9 @@ The design system uses CSS custom properties (CSS variables) to maintain consist
 }
 ```
 
-#### Dark Theme Variables
+#### Dark Theme
 
-```css
-[data-theme="dark"] {
-  --figma-color-bg: #2c2c2c; /* Primary background */
-  --figma-color-bg-secondary: #383838; /* Secondary background */
-  --figma-color-text: #ffffff; /* Primary text */
-  --figma-color-text-secondary: #cccccc; /* Secondary text */
-  --figma-color-border: #444444; /* Standard borders */
-  --figma-color-border-strong: #555555; /* Strong borders */
-  --figma-color-icon: #cccccc; /* Icon color */
-  --figma-color-bg-brand: #18a0fb; /* Brand/primary color */
-  --figma-color-text-brand: #ffffff; /* Text on brand background */
-  --figma-color-bg-selected: #1a3a4a; /* Selected state background */
-  --figma-color-text-selected: #18a0fb; /* Selected state text */
-}
-```
+No dark values are hard-coded. In dark mode Figma injects dark values for the same variables (and adds a `figma-dark` class to `<html>`), so every component that uses the variables switches automatically.
 
 ### Color Usage Guidelines
 
@@ -90,36 +80,11 @@ font-family: Inter, Arial, Helvetica, sans-serif;
 
 ## Component Library
 
-### 1. Theme Toggle Component
-
-**File**: `src/components/ThemeToggle.tsx`
-
-A button component that allows users to switch between light and dark themes.
-
-```tsx
-import ThemeToggle from "./components/ThemeToggle";
-
-// Usage
-<ThemeToggle className="custom-class" />;
-```
-
-**Features**:
-
-- Automatic theme detection
-- Smooth transitions
-- Accessible with proper ARIA labels
-- Emoji indicators (☀️ for light, 🌙 for dark)
-
-**Styling Classes**:
-
-- `.theme-toggle` - Base styling
-- Hover and active states included
-
-### 2. Input Components
+### 1. Input Components
 
 **File**: `src/components/Inputs.tsx`
 
-Form input components with consistent styling.
+Controlled count + unit inputs. State lives in `App` (`src/ui.tsx`).
 
 **Styling Classes**:
 
@@ -127,74 +92,39 @@ Form input components with consistent styling.
 - `select` - Dropdown menus
 - `.input-group-div` - Input container
 
-### 3. Button Components
+### 2. Button Components
 
-**File**: `src/components/Buttons.tsx`
+**Files**: `src/components/Buttons.tsx`, `src/components/LangButton.tsx`
 
-Action buttons with consistent styling and states.
+Language buttons are generated from `LANGUAGES` in `src/data/languages.ts`, in two groups: Indian languages (`group: "desi"`) and the classic Lorem ipsum (`group: "classic"`). To add a language, add a config entry there and a word array in `src/data/wordSpace.ts`.
 
 **Styling Classes**:
 
-- `.button-pri` - Primary buttons
+- `.button-pri` - Language buttons
+- `.button-wide` - Wider variant for long labels (e.g. "Lorem ipsum")
 - `.buttons-div` - Button container
 
-### 4. Layout Components
+### 3. Layout Components
 
-**File**: `src/components/PageHeading.tsx`, `src/components/BottomSection.tsx`
-
-Layout and structural components.
+**File**: `src/components/BottomSection.tsx`
 
 **Styling Classes**:
 
-- `.heading-div` - Page heading container
-- `.heading-text` - Page heading text
 - `.content-div` - Content containers
-- `.bottomContainer` - Footer container
+- `.bottom-wrapper` - Footer container
+- `.icon-button` - Small square icon button (disclaimer)
 
 ## Theme System
 
-### Theme Hook
-
-**File**: `src/hooks/useFigmaTheme.ts`
-
-A React hook that manages theme state and provides theme switching functionality.
-
-```tsx
-import { useFigmaTheme } from "../hooks/useFigmaTheme";
-
-const { theme, isDark, toggleTheme } = useFigmaTheme();
-```
-
-**Returns**:
-
-- `theme`: Current theme ("light" | "dark")
-- `isDark`: Boolean indicating if dark theme is active
-- `toggleTheme`: Function to switch themes
-
-### Theme Detection
-
-The system automatically detects the appropriate theme:
-
-1. **Figma Environment**: Attempts to detect Figma's current theme
-2. **System Preference**: Falls back to user's system preference
-3. **Manual Override**: Users can manually toggle themes
-
-### Theme Communication
+The plugin follows Figma's theme automatically. There's no manual toggle, theme hook or theme messages.
 
 **Plugin Code** (`src/code.ts`):
 
 ```typescript
-// Handle theme requests
-if (msg.type === "get-theme") {
-  const currentTheme = "light"; // Default theme
-  figma.ui.postMessage({
-    pluginMessage: {
-      type: "theme-changed",
-      theme: currentTheme,
-    },
-  });
-}
+figma.showUI(__html__, { width: 240, height: 505, themeColors: true });
 ```
+
+When the user switches Figma between light and dark, Figma updates the injected variables live, with no plugin code involved. If a style ever needs to differ beyond colour, target `html.figma-dark` in CSS.
 
 ## Implementation Guidelines
 
@@ -230,13 +160,14 @@ if (msg.type === "get-theme") {
 ```
 src/
 ├── components/
-│   ├── ThemeToggle.tsx      # Theme toggle component
-│   ├── Inputs.tsx          # Input components
-│   ├── Buttons.tsx         # Button components
-│   ├── PageHeading.tsx     # Page heading component
+│   ├── Inputs.tsx          # Count + unit inputs
+│   ├── Buttons.tsx         # Language button groups
+│   ├── LangButton.tsx      # Single language button
 │   └── BottomSection.tsx   # Footer component
-├── hooks/
-│   └── useFigmaTheme.ts    # Theme management hook
+├── data/
+│   ├── languages.ts        # Language config (fonts, punctuation, groups), shared by UI + plugin
+│   └── wordSpace.ts        # Word bank per language (plugin side only)
+├── generator.ts            # Pure text generator (no Figma API)
 ├── ui.css                  # Design system styles
 ├── ui.tsx                  # Main UI component
 └── code.ts                 # Plugin logic
@@ -295,25 +226,6 @@ export default function NewComponent({ className = "" }: NewComponentProps) {
 .my-component:hover {
   background-color: var(--figma-color-bg-secondary);
   border-color: var(--figma-color-border-strong);
-}
-```
-
-### Using the Theme Hook
-
-```tsx
-import { useFigmaTheme } from "../hooks/useFigmaTheme";
-
-function MyComponent() {
-  const { theme, isDark, toggleTheme } = useFigmaTheme();
-
-  return (
-    <div>
-      <p>Current theme: {theme}</p>
-      <button onClick={toggleTheme}>
-        Switch to {isDark ? "light" : "dark"} mode
-      </button>
-    </div>
-  );
 }
 ```
 
