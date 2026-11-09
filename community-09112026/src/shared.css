@@ -1,0 +1,52 @@
+/* Shared tokens and fonts for the Desi Ipsum community assets (cover, slides, icons). */
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Mukta:wght@400;600;700;800&family=Mukta+Mahee:wght@500;700&family=Hind+Siliguri:wght@500;700&family=Hind+Vadodara:wght@500;700&family=Hind+Madurai:wght@500;700&family=Hind+Guntur:wght@500;700&family=Noto+Sans+Kannada:wght@500;700&family=Noto+Sans+Malayalam:wght@500;700&family=Noto+Sans+Bengali:wght@500;700&family=Noto+Sans+Ol+Chiki:wght@500;700&family=Noto+Sans+Meetei+Mayek:wght@500;700&family=Baloo+Bhaina+2:wght@500;700&display=block");
+
+:root {
+  --ink: #0f172a;
+  --ink-2: #334155;
+  --ink-3: #64748b;
+  --paper: #fbfaf7;
+  --line: #e7e5e0;
+  --blue: #2f5bea;
+  --blue-deep: #1a33b8;
+  --saffron: #ff8a1f;
+  --rose: #f0436a;
+  --teal: #14b8a6;
+  --sans: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+  --serif: "Instrument Serif", Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--sans);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* A fixed-size canvas at the top-left; the render script screenshots exactly this area. */
+.canvas {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+/* Script fonts (same families the plugin applies in Figma) */
+.f-Hindi, .f-Marathi, .f-Sanskrit, .f-Nepali { font-family: "Mukta", sans-serif; }
+.f-Bangla { font-family: "Hind Siliguri", sans-serif; }
+.f-Assamese { font-family: "Noto Sans Bengali", sans-serif; }
+.f-Gujarati { font-family: "Hind Vadodara", sans-serif; }
+.f-Tamil { font-family: "Hind Madurai", sans-serif; }
+.f-Telugu { font-family: "Hind Guntur", sans-serif; }
+.f-Kannada { font-family: "Noto Sans Kannada", sans-serif; }
+.f-Malayalam { font-family: "Noto Sans Malayalam", sans-serif; }
+.f-Odia { font-family: "Baloo Bhaina 2", sans-serif; }
+.f-Punjabi { font-family: "Mukta Mahee", sans-serif; }
+.f-Santali { font-family: "Noto Sans Ol Chiki", sans-serif; }
+.f-Manipuri { font-family: "Noto Sans Meetei Mayek", sans-serif; }
+.f-Lorem, .f-Shakespeare { font-family: var(--serif); }

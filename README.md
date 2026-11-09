@@ -14,6 +14,9 @@ Works seamlessly across all Figma applications: Figma Design, FigJam, Figma Slid
 15 Indian Languages Supported: Generate placeholder text in Hindi, Marathi, Sanskrit, Nepali, Tamil, Kannada, Telugu, Malayalam, Gujarati, Bangla, Assamese, Odia, Punjabi, Santali (Ol Chiki) and Manipuri (Meitei Mayek)
 Classic Lorem Ipsum and Shakespeare too: One click gives you the standard "Lorem ipsum dolor sit amet…" Latin text, or English placeholder text made from public-domain Shakespeare, opening with one of his famous lines, in your layer's own font
 Flexible Text Generation: Create words, sentences, or full paragraphs based on your needs
+Fill Text Box: Fill each text layer exactly to its size, whether it's a fixed box, auto height or a single auto-width line
+Quick Actions: Run it from Figma's quick actions (type "Desi Ipsum", pick a language and an amount) without opening the plugin window
+Regenerate: Filled layers get a "Regenerate text" button in Figma's right panel for a fresh random fill with the same settings
 Uses proper script rendering and language-specific punctuation marks
 Select multiple text layers and fill them all at once with unique content
 Compatibility: Works across all Figma applications (Design, FigJam, Slides, Buzz)

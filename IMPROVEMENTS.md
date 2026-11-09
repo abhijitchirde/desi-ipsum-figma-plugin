@@ -145,12 +145,55 @@ How the word banks were built (scratch scripts, not in the repo):
 - [x] Manual check in Figma (by you): the 3 Noto fonts load (Noto Sans Bengali, Noto Sans Ol Chiki, Noto Sans Meetei Mayek); if one doesn't, the layer keeps its current font
 - [-] Native-speaker check (dropped: none available. Low risk: every word appears in 2+ real Wikipedia articles, ᱾ and ꯫ are the standard Unicode full stops, and the plugin's disclaimer says the text has no literal meaning)
 
+## Phase 11: Fill to fit
+
+Decision: a "Fill text box" option in the type dropdown (the number box is disabled). Each layer is filled according to its text resizing setting:
+
+| Layer resizing | Fills to |
+|---|---|
+| Fixed size / Truncate | the box (width and height stay the same) |
+| Auto height | its current height |
+| Auto width | its current width, on one line |
+
+- [x] `Mode` = words / sentences / paragraphs / fill (shared by UI and plugin)
+- [x] Fill algorithm: generate enough paragraphs to overflow (doubling), then binary-search the longest word prefix that fits; end on a clean full stop (no trailing comma); at least 1 word; capped at 3000 words
+- [x] Measure with the box temporarily set to auto height (or auto width), then restore the original resizing and size
+- [x] Apply the language font before measuring (the font changes the size)
+- [x] Classic opening line still goes on the first layer
+- [x] UI: "Fill text box" option; number input disabled while it's selected
+
+## Phase 12: Quick actions + Regenerate
+
+Decision: Figma quick actions (manifest `parameters`, `parameterOnly: false`), so a normal run still opens the window, plus a "Regenerate text" relaunch button on filled layers.
+
+- [x] Restructure startup around `figma.on("run")`: no parameters → open the UI; parameters → generate and close with a message; `regenerate` command → regenerate the selection
+- [x] Parameter `Language`: suggestions filtered by English or native name
+- [x] Parameter `Amount` (optional, default 5 sentences): suggestions like "Fill text box", "5 words", "3 sentences", "1 paragraph"; typing a number suggests that number of each; free text like "10 words" / "fill" is parsed
+- [x] Every filled layer stores its settings (`setPluginData`) and gets `setRelaunchData` → "Regenerate text" button in Figma's right panel; regenerating reuses each layer's own language and amount
+- [x] Manifest: `parameters`, `parameterOnly: false`, `relaunchButtons`
+- [x] Build passes, no type errors in `src/`
+- [x] Pure tests (fake box = character limit): fill for every language and box size from 3 to 9000 chars fits, ends on a full stop with no trailing comma, never ends on the start of a new paragraph, one-line fill has no line breaks, Lorem opening kept, under 40 measurements; uses ~99% of a 300-char box; cap ~500 words (approximate: a paragraph break joins two words into one chunk)
+- [x] Amount parsing/suggestion tests ("10 words", "3s", "2 para", "7", "fi", "3sen" → "3 sentences")
+- [x] Manual check in Figma (by you): Regenerate button shows in the right panel and works
+- [x] Manual check in Figma (by you): fill in all three resizing modes (fixed, auto height, auto width); quick actions flow (language → amount, typed amounts, default); normal run still opens the window
+
+## Phase 13: Community page assets (`community-09112026/`)
+
+- [x] 4 icon options (Cursor, Scripts, Placeholder, Shirorekha) at 128 px (upload size) and 512 px, plus a comparison sheet at 64/32/16 px on light and dark
+- [x] New cover (1920×960) with the real plugin UI in light and dark, the 15 native language names, and the new features
+- [x] 4 carousel slides (1920×1080): languages with real generated text, fill text box (actually fitted in the browser), quick actions + regenerate, western classics + themes
+- [x] New page description + tagline options (`community-09112026/description.md`)
+- [x] `npm run community` re-renders everything (`-- --icon N` picks the icon used on the cover/slides)
+- [x] Icon chosen: option 1 (Cursor). Cover and slides already use it
+- [x] Folder renamed to `community-09112026` (dated, so later redesigns can sit alongside it)
+- [ ] Upload icon, cover, slides and text to the Community page once Phases 11–12 are checked in Figma
+
 ---
 
 ## Backlog (later, not in this pass)
 
-- [ ] Fill to fit: fill a fixed-size text box until it overflows
-- [ ] Quick actions: manifest `parameters` / `menu` so it runs from the command palette; `setRelaunchData` "Regenerate" button
+- [x] Fill to fit (moved to Phase 11)
+- [x] Quick actions + Regenerate button (moved to Phase 12)
 - [ ] Remember last settings with `figma.clientStorage`
 - [ ] Select a frame to fill all text layers inside it
 - [ ] Character-count mode for buttons and labels

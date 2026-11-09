@@ -92,3 +92,22 @@ export const MAX_COUNT: Record<Unit, number> = {
   sentences: 300,
   paragraphs: 50,
 };
+
+/** What to generate: a counted unit, or "fill" (fill the text box to its size; count is ignored). */
+export type Mode = Unit | "fill";
+
+export const MODES: Mode[] = [...UNITS, "fill"];
+
+export interface Amount {
+  mode: Mode;
+  count: number;
+}
+
+export const DEFAULT_AMOUNT: Amount = { mode: "sentences", count: 5 };
+
+/** "3 sentences", "1 paragraph", "Fill text box" */
+export function describeAmount(amount: Amount): string {
+  if (amount.mode === "fill") return "Fill text box";
+  const singular = amount.mode.slice(0, -1);
+  return `${amount.count} ${amount.count === 1 ? singular : amount.mode}`;
+}

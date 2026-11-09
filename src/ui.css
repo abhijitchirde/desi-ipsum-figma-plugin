@@ -147,6 +147,11 @@ body {
     color 0.2s ease;
 }
 
+.input-number:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .input-number:focus {
   outline: none;
   border-color: var(--figma-color-bg-brand);

@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Desi Ipsum slides</title>
+    <link rel="stylesheet" href="shared.css" />
+    <link rel="stylesheet" href="icons.css" />
+    <link rel="stylesheet" href="window.css" />
+    <link rel="stylesheet" href="slides.css" />
+    <style>
+      /* ---------- Slide 1: languages ---------- */
+      .lang-grid {
+        margin-top: 56px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 22px;
+      }
+      .lang-card {
+        padding: 22px 24px 24px;
+        height: 196px;
+        display: flex;
+        flex-direction: column;
+      }
+      .lang-card .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+      .lang-card .native {
+        font-size: 24px;
+        color: var(--blue);
+        font-weight: 700;
+      }
+      .lang-card .text {
+        margin-top: 20px;
+        font-size: 25px;
+        line-height: 1.45;
+        color: var(--ink);
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      /* ---------- Slide 2: fill text box ---------- */
+      .fill-row {
+        margin-top: 56px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 40px;
+      }
+      .fill-col {
+        padding: 34px 34px 30px;
+        height: 560px;
+        display: flex;
+        flex-direction: column;
+      }
+      .fill-col h3 {
+        margin: 14px 0 0;
+        font: 800 34px/1.1 var(--sans);
+        letter-spacing: -0.02em;
+      }
+      .fill-col p {
+        margin: 10px 0 0;
+        font: 500 22px/1.4 var(--sans);
+        color: var(--ink-3);
+      }
+      .stage {
+        margin-top: auto;
+        height: 330px;
+        border-radius: 14px;
+        background: repeating-linear-gradient(0deg, #f6f5f1 0 1px, transparent 1px 24px),
+          repeating-linear-gradient(90deg, #f6f5f1 0 1px, transparent 1px 24px), #fcfbf8;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .layer {
+        position: relative;
+        outline: 2px solid #2f80ff;
+        color: var(--ink);
+      }
+      .layer i {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: #fff;
+        border: 2px solid #2f80ff;
+      }
+      .layer i.tl { left: -6px; top: -6px; }
+      .layer i.tr { right: -6px; top: -6px; }
+      .layer i.bl { left: -6px; bottom: -6px; }
+      .layer i.br { right: -6px; bottom: -6px; }
+      .layer .t {
+        overflow: hidden;
+      }
+      .size-tag {
+        position: absolute;
+        left: 50%;
+        bottom: -38px;
+        transform: translateX(-50%);
+        background: #2f80ff;
+        color: #fff;
+        font: 700 15px/1 var(--sans);
+        padding: 6px 9px;
+        border-radius: 6px;
+        white-space: nowrap;
+      }
+
+      /* ---------- Slide 3: quick actions ---------- */
+      .qa-row {
+        margin-top: 64px;
+        display: grid;
+        grid-template-columns: 1.25fr 1fr;
+        gap: 48px;
+      }
+      .palette {
+        background: #1f1f22;
+        color: #f4f4f5;
+        border-radius: 22px;
+        padding: 22px;
+        box-shadow: 0 30px 70px rgba(15, 23, 42, 0.25);
+        font-family: var(--sans);
+      }
+      .palette .input {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: #2b2b30;
+        border-radius: 14px;
+        padding: 18px 20px;
+        font-size: 26px;
+        font-weight: 600;
+      }
+      .palette .pill {
+        background: #3a3a42;
+        padding: 7px 12px;
+        border-radius: 9px;
+        font-size: 22px;
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .palette .pill b {
+        color: #a1a1aa;
+        font-weight: 600;
+      }
+      .palette .caret {
+        width: 3px;
+        height: 30px;
+        background: #7aa7ff;
+        border-radius: 2px;
+      }
+      .palette .hint {
+        color: #a1a1aa;
+        font-size: 20px;
+        margin: 20px 8px 10px;
+        font-weight: 600;
+      }
+      .palette .opt {
+        padding: 16px 18px;
+        border-radius: 12px;
+        font-size: 24px;
+        font-weight: 600;
+        color: #e4e4e7;
+      }
+      .palette .opt.on {
+        background: #2f5bea;
+        color: #fff;
+      }
+      .panel {
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+      }
+      .panel .sample {
+        font-size: 30px;
+        line-height: 1.5;
+        padding: 22px 24px;
+        outline: 2px solid #2f80ff;
+        border-radius: 4px;
+      }
+      .panel .sect {
+        border-top: 1px solid var(--line);
+        padding-top: 20px;
+      }
+      .relaunch {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-top: 14px;
+        padding: 16px 18px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+      }
+      .relaunch .txt b {
+        font: 700 24px/1.2 var(--sans);
+      }
+      .relaunch .txt small {
+        display: block;
+        font: 500 19px/1.3 var(--sans);
+        color: var(--ink-3);
+        margin-top: 4px;
+      }
+      .relaunch .go {
+        margin-left: auto;
+        font: 700 20px/1 var(--sans);
+        color: #fff;
+        background: var(--blue);
+        padding: 12px 16px;
+        border-radius: 10px;
+      }
+
+      /* ---------- Slide 4: classics + theme ---------- */
+      .s4-row {
+        margin-top: 64px;
+        display: grid;
+        grid-template-columns: 1fr 760px;
+        gap: 56px;
+      }
+      .classic {
+        padding: 30px 34px;
+        margin-bottom: 26px;
+      }
+      .classic .text {
+        margin-top: 16px;
+        font: 500 27px/1.5 var(--sans);
+        color: var(--ink-2);
+      }
+      .classic .text b {
+        color: var(--ink);
+      }
+      .themes {
+        position: relative;
+        height: 640px;
+      }
+      .themes .pw {
+        position: absolute;
+        top: 0;
+      }
+      .theme-note {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -10px;
+        text-align: center;
+        font: 600 22px/1.4 var(--sans);
+        color: var(--ink-3);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1920×1080 carousel slides. Query: ?slide=1..4&icon=1..4 -->
+    <div class="canvas slide" id="canvas"></div>
+
+    <script src="icons.js"></script>
+    <script src="samples.js"></script>
+    <script src="window.js"></script>
+    <script>
+      const params = new URLSearchParams(location.search);
+      const slide = Number(params.get("slide") || 1);
+      const icon = Number(params.get("icon") || 1);
+      const canvas = document.getElementById("canvas");
+      const el = (html) => {
+        const t = document.createElement("template");
+        t.innerHTML = html.trim();
+        return t.content.firstChild;
+      };
+      const brand = el(`<div class="brand-mini"><span>Desi Ipsum</span></div>`);
+      brand.prepend(renderIcon(icon, 44, { rounded: true }));
+      canvas.appendChild(brand);
+
+      const slides = {
+        // ---------- 1. Languages ----------
+        1() {
+          canvas.append(
+            el(`<div class="kicker">15 Indian languages</div>`),
+            el(`<h1 class="title">Real scripts, real fonts, <em>native punctuation.</em></h1>`)
+          );
+          const grid = el(`<div class="lang-grid"></div>`);
+          Object.entries(SAMPLES)
+            .filter(([, s]) => s.group === "desi")
+            .forEach(([id, s]) => {
+              grid.appendChild(
+                el(`<div class="card lang-card">
+                      <div class="top"><span class="label">${s.label}</span><span class="native f-${id}">${s.native}</span></div>
+                      <div class="text f-${id}">${s.text}</div>
+                    </div>`)
+              );
+            });
+          canvas.appendChild(grid);
+        },
+
+        // ---------- 2. Fill text box ----------
+        2() {
+          canvas.append(
+            el(`<div class="kicker">New · Fill text box</div>`),
+            el(`<h1 class="title">Fills every layer <em>exactly to its size.</em></h1>`)
+          );
+          const row = el(`<div class="fill-row"></div>`);
+          const cols = [
+            { title: "Fixed size", note: "The box keeps its size. Text fills it and ends on a full stop.", lang: "Hindi", text: LONG_SAMPLES.hindiPara, w: 400, h: 220, size: 24, stop: "।" },
+            { title: "Auto height", note: "Fills to the layer's current height, so your layout doesn't jump.", lang: "Tamil", text: LONG_SAMPLES.tamilPara, w: 400, h: 150, size: 24, stop: "." },
+            { title: "Auto width", note: "One-line labels and buttons get a single line, as wide as now.", lang: "Bangla", text: LONG_SAMPLES.banglaLine + " " + SAMPLES.Bangla.text, w: 330, h: null, size: 30, stop: "।" },
+          ];
+          cols.forEach((c) => {
+            const col = el(`<div class="card fill-col">
+                <div class="label">${c.title === "Auto width" ? "Single line" : "Text box"}</div>
+                <h3>${c.title}</h3><p>${c.note}</p>
+                <div class="stage"><div class="layer"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
+                  <div class="t f-${c.lang}"></div><span class="size-tag">${c.w} × ${c.h || 40}</span></div></div>
+              </div>`);
+            const t = col.querySelector(".t");
+            Object.assign(t.style, { width: c.w + "px", fontSize: c.size + "px", lineHeight: 1.5 });
+            if (c.h) t.style.height = c.h + "px";
+            else t.style.whiteSpace = "nowrap";
+            row.appendChild(col);
+            // Same idea as the plugin: drop words until the text fits, then end on a full stop.
+            // Measure only after the web fonts have loaded, or the fit would be for the fallback font.
+            document.fonts.ready.then(() => {
+              let words = (c.text + " " + c.text).split(" ");
+              const fits = () => (c.h ? t.scrollHeight <= c.h + 1 : t.scrollWidth <= c.w + 1);
+              const set = (n) => (t.textContent = words.slice(0, n).join(" ").replace(/[,।.]$/, "") + c.stop);
+              let n = words.length;
+              set(n);
+              while (n > 1 && !fits()) set(--n);
+              if (!c.h) {
+                // Auto width: the layer hugs its one line of text.
+                t.style.width = "auto";
+                col.querySelector(".size-tag").textContent = `${Math.round(t.offsetWidth)} × ${Math.round(t.offsetHeight)}`;
+              }
+            });
+          });
+          canvas.appendChild(row);
+          canvas.appendChild(
+            el(`<p class="sub" style="margin-top:40px">Pick <b style="color:var(--ink)">Fill text box</b> in the dropdown, or type “fill” in quick actions.</p>`)
+          );
+        },
+
+        // ---------- 3. Quick actions + Regenerate ----------
+        3() {
+          canvas.append(
+            el(`<div class="kicker">New · Quick actions &amp; Regenerate</div>`),
+            el(`<h1 class="title">Fill text <em>without opening the plugin.</em></h1>`)
+          );
+          const row = el(`<div class="qa-row">
+              <div class="palette">
+                <div class="input">Desi Ipsum <span class="pill"><b>Language</b> Hindi (हिंदी)</span><span class="pill"><b>Amount</b> 3</span><span class="caret"></span></div>
+                <div class="hint">Amount</div>
+                <div class="opt">3 words</div>
+                <div class="opt on">3 sentences</div>
+                <div class="opt">3 paragraphs</div>
+                <div class="hint" style="margin-top:24px">Or type “fill”, “10 words”, “2 para”…</div>
+              </div>
+              <div class="card panel">
+                <div class="label">Selected text layer</div>
+                <div class="sample f-Hindi">${LONG_SAMPLES.hindiPara.split("।").slice(0, 2).join("।")}।</div>
+                <div class="sect">
+                  <div class="label">Plugin</div>
+                  <div class="relaunch"></div>
+                </div>
+              </div>
+            </div>`);
+          const relaunch = row.querySelector(".relaunch");
+          relaunch.appendChild(renderIcon(icon, 44, { rounded: true }));
+          relaunch.appendChild(el(`<div class="txt"><b>Regenerate text</b><small>Hindi · 3 sentences</small></div>`));
+          relaunch.appendChild(el(`<span class="go">↻ Run</span>`));
+          canvas.appendChild(row);
+          canvas.appendChild(
+            el(`<p class="sub" style="margin-top:44px">Every filled layer remembers its language and amount. One click on <b style="color:var(--ink)">Regenerate text</b> gives it fresh random text, even for many layers at once.</p>`)
+          );
+        },
+
+        // ---------- 4. Western classics + theme ----------
+        4() {
+          canvas.append(
+            el(`<div class="kicker">Western classics · Light &amp; dark</div>`),
+            el(`<h1 class="title">Lorem ipsum and Shakespeare, <em>right next door.</em></h1>`)
+          );
+          const row = el(`<div class="s4-row">
+              <div>
+                <div class="card classic"><div class="label">Lorem ipsum</div><div class="text">${LONG_SAMPLES.loremPara.replace("Lorem ipsum dolor sit amet, consectetur adipiscing elit.", "<b>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b>")}</div></div>
+                <div class="card classic"><div class="label">Shakespeare</div><div class="text">${LONG_SAMPLES.shakespearePara.replace(/^([^.?!]*[.?!])/, "<b>$1</b>")}</div></div>
+                <p class="sub" style="margin-top:6px;font-size:24px">The first layer opens with the classic line: Lorem's famous opening, or one of 15 famous Shakespeare lines. Both keep your layer's own font.</p>
+              </div>
+              <div class="themes" id="themes"><div class="theme-note">Follows Figma's theme, or pick Light / Dark</div></div>
+            </div>`);
+          canvas.appendChild(row);
+          const themes = row.querySelector("#themes");
+          const light = pluginWindow({ theme: "light", icon, scale: 1.18 });
+          const dark = pluginWindow({ theme: "dark", icon, scale: 1.18 });
+          light.style.left = "0px";
+          dark.style.left = "390px";
+          dark.style.top = "-40px";
+          themes.prepend(dark);
+          themes.prepend(light);
+        },
+      };
+      (slides[slide] || slides[1])();
+    </script>
+  </body>
+</html>

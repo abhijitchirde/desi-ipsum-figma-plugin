@@ -182,6 +182,8 @@ src/
 │   ├── languages.ts        # Language config (fonts, punctuation, groups), shared by UI + plugin
 │   └── wordSpace.ts        # Word bank per language (plugin side only)
 ├── generator.ts            # Pure text generator (no Figma API)
+├── fill.ts                 # Pure fill-to-fit search (caller measures the layer)
+├── amount.ts               # Pure amount parsing/validation + quick-action suggestions
 ├── ui.css                  # Design system styles
 ├── ui.tsx                  # Main UI component
 └── code.ts                 # Plugin logic

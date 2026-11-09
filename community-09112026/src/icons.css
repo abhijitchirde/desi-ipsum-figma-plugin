@@ -1,0 +1,158 @@
+/* Icon drawings. 1em = 1% of the icon size (set on .icon-wrap). */
+
+.icon-wrap {
+  position: relative;
+  overflow: hidden;
+  flex: none;
+}
+.icon-wrap.rounded {
+  border-radius: 22em;
+}
+.ic {
+  position: absolute;
+  inset: 0;
+}
+
+/* ---------- 1. Cursor ---------- */
+.ic1 {
+  background: linear-gradient(150deg, #4a7bff 0%, #2f5bea 45%, #1a33b8 100%);
+}
+.ic1-glow {
+  position: absolute;
+  width: 90em;
+  height: 90em;
+  left: -30em;
+  top: -45em;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 65%);
+}
+.ic1-cursor {
+  position: absolute;
+  left: 21.5em;
+  top: 23em;
+  height: 54em;
+  width: 13em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ic1-cursor i {
+  display: block;
+  width: 13em;
+  height: 4.6em;
+  border-radius: 2.3em;
+  background: #fff;
+}
+.ic1-cursor b {
+  display: block;
+  flex: 1;
+  width: 4.6em;
+  background: #fff;
+  margin: -0.5em 0;
+}
+/* Big letters: position in % (of the tile), because em here would be the letter's own size. */
+.ic1-letter {
+  position: absolute;
+  left: 37.5%;
+  top: 14%;
+  font: 800 58em/1 "Mukta", sans-serif;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- 2. Scripts ---------- */
+.ic2 {
+  background: radial-gradient(120% 120% at 20% 0%, #26324d 0%, #111827 60%);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 13em;
+  gap: 2em;
+}
+.ic2-l {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  line-height: 1;
+}
+.ic2-l.a { font: 700 34em/1 "Mukta", sans-serif; color: #ff9a3c; }
+.ic2-l.b { font: 700 32em/1 "Hind Siliguri", sans-serif; color: #ff6b9a; }
+.ic2-l.c { font: 700 30em/1 "Hind Madurai", sans-serif; color: #2dd4bf; }
+.ic2-l.d { font: 700 30em/1 "Noto Sans Kannada", sans-serif; color: #7aa7ff; }
+
+/* ---------- 3. Placeholder ---------- */
+.ic3 {
+  background: linear-gradient(145deg, #ffb03a 0%, #ff7a2f 40%, #f0436a 100%);
+}
+.ic3-card {
+  position: absolute;
+  left: 15em;
+  top: 17em;
+  width: 70em;
+  height: 66em;
+  border-radius: 12em;
+  background: #fff;
+  box-shadow: 0 3em 8em rgba(120, 20, 40, 0.25);
+  padding: 9em 10em;
+}
+.ic3-head {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  height: 22em;
+}
+.ic3-head span {
+  font: 800 30em/1 "Mukta", sans-serif;
+  color: #f0436a;
+  margin-top: -0.06em;
+}
+.ic3-head em {
+  display: block;
+  width: 3em;
+  height: 20em;
+  border-radius: 1.5em;
+  background: #ff7a2f;
+}
+.ic3-line {
+  height: 5.5em;
+  border-radius: 3em;
+  background: #f1e3dc;
+  margin-top: 5em;
+}
+.ic3-line.w1 { width: 100%; }
+.ic3-line.w2 { width: 84%; }
+.ic3-line.w3 { width: 58%; }
+
+/* ---------- 4. Shirorekha ---------- */
+.ic4 {
+  background: linear-gradient(160deg, #ff9a2e 0%, #ff6a1f 55%, #e8451a 100%);
+}
+.ic4-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* Measured from the rendered glyphs: Mukta 800's headline sits at 39.45%–43.9% of the tile. */
+  top: 39.35em;
+  height: 4.65em;
+  background: #fff;
+}
+.ic4-word {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 32.5%;
+  font: 800 44em/1 "Mukta", sans-serif;
+  color: #fff;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+.ic4-caret {
+  position: absolute;
+  right: 11em;
+  top: 47em;
+  width: 3.4em;
+  height: 26em;
+  border-radius: 1.7em;
+  background: rgba(255, 255, 255, 0.85);
+  display: none;
+}
