@@ -186,7 +186,7 @@ Decision: Figma quick actions (manifest `parameters`, `parameterOnly: false`), s
 - [x] `npm run community` re-renders everything (`-- --icon N` picks the icon used on the cover/slides)
 - [x] Icon chosen: option 1 (Cursor). Cover and slides already use it
 - [x] Folder renamed to `community-09112026` (dated, so later redesigns can sit alongside it)
-- [ ] Upload icon, cover, slides and text to the Community page once Phases 11–12 are checked in Figma
+- [ ] Upload icon, cover, slides and text to the Community page (you; unblocked: Phases 11–12 are checked in Figma)
 
 ---
 

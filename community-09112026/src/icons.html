@@ -73,8 +73,16 @@
     </div>
     <script src="icons.js"></script>
     <script>
+      // ?set=fresh shows the fresh directions (5–7); default shows the original options (1–4).
+      const set = new URLSearchParams(location.search).get("set") || "original";
+      const list = ICON_OPTIONS.filter((o) => (o.set || "original") === set);
+      if (set === "fresh") {
+        document.querySelector(".kicker").textContent = "Icon options · fresh directions";
+        document.querySelector(".title").innerHTML = "Starting from scratch, <em>three ideas.</em>";
+      }
       const options = document.getElementById("options");
-      ICON_OPTIONS.forEach((o) => {
+      options.style.gridTemplateColumns = `repeat(${list.length}, 1fr)`;
+      list.forEach((o) => {
         const card = document.createElement("div");
         card.className = "card opt";
         card.innerHTML = `<div class="big"></div><h3><span>${o.id}</span>${o.name}</h3><p>${o.note}</p>

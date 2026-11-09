@@ -27,7 +27,7 @@
 }
 .ic1-cursor {
   position: absolute;
-  left: 21.5em;
+  left: 12.4em;
   top: 23em;
   height: 54em;
   width: 13em;
@@ -52,9 +52,9 @@
 /* Big letters: position in % (of the tile), because em here would be the letter's own size. */
 .ic1-letter {
   position: absolute;
-  left: 37.5%;
-  top: 14%;
-  font: 800 58em/1 "Mukta", sans-serif;
+  left: 29.2%;
+  top: 10.5%;
+  font: 800 83.2em/1 "Mukta", sans-serif;
   color: #fff;
   letter-spacing: -0.02em;
 }
@@ -146,6 +146,42 @@
   white-space: nowrap;
   letter-spacing: -0.01em;
 }
+/* ---------- 5. Chandrabindu i ---------- */
+.ic5 {
+  background: radial-gradient(120% 120% at 25% 10%, #2e3580 0%, #191c45 55%, #11132f 100%);
+}
+.ic5 svg,
+.ic7 svg {
+  display: block;
+}
+
+/* ---------- 6. अa specimen ---------- */
+.ic6 {
+  background: linear-gradient(160deg, #fff6ea 0%, #ffe9d2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ic6-pair {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5em;
+  margin-top: -3%;
+}
+.ic6-pair .d {
+  font: 800 50em/1 "Mukta", sans-serif;
+  color: #1b1f3b;
+}
+.ic6-pair .l {
+  font: italic 400 62em/1 "Instrument Serif", Georgia, serif;
+  color: #e5482d;
+}
+
+/* ---------- 7. Paisley bubble ---------- */
+.ic7 {
+  background: radial-gradient(120% 120% at 20% 0%, #17605f 0%, #0e3b3d 60%, #0a2c2e 100%);
+}
+
 .ic4-caret {
   position: absolute;
   right: 11em;

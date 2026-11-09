@@ -60,17 +60,31 @@ function shot(page, query, width, height, file) {
   console.log("✓", path.relative(here, target));
 }
 
-const iconNames = { 1: "cursor", 2: "scripts", 3: "placeholder", 4: "shirorekha" };
+const iconsOnly = process.argv.includes("--icons-only");
+
+const iconNames = {
+  1: "cursor",
+  2: "scripts",
+  3: "placeholder",
+  4: "shirorekha",
+  // fresh directions
+  5: "di-chandrabindu",
+  6: "specimen",
+  7: "paisley",
+};
 for (const [id, name] of Object.entries(iconNames)) {
   shot("icon.html", { option: id, size: 128 }, 128, 128, `icons/icon-${id}-${name}-128.png`);
   shot("icon.html", { option: id, size: 512 }, 512, 512, `icons/icon-${id}-${name}-512.png`);
 }
 shot("icons.html", {}, 1920, 1080, "icons/icon-options-overview.png");
+shot("icons.html", { set: "fresh" }, 1920, 1080, "icons/icon-options-fresh-overview.png");
 
-shot("cover.html", { icon }, 1920, 960, "cover-1920x960.png");
-for (const n of [1, 2, 3, 4]) {
-  shot("slides.html", { slide: n, icon }, 1920, 1080, `slide-${n}-1920x1080.png`);
+if (!iconsOnly) {
+  shot("cover.html", { icon }, 1920, 960, "cover-1920x960.png");
+  for (const n of [1, 2, 3, 4]) {
+    shot("slides.html", { slide: n, icon }, 1920, 1080, `slide-${n}-1920x1080.png`);
+  }
 }
 
 fs.rmSync(profile, { recursive: true, force: true });
-console.log(`Done (cover and slides use icon option ${icon}).`);
+console.log(iconsOnly ? "Done (icons only)." : `Done (cover and slides use icon option ${icon}).`);

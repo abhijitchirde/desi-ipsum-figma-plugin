@@ -24,6 +24,16 @@ Everything for the plugin's Figma Community page: icon options, cover, carousel 
 
 Options 1 and 2 stay readable at 16 px (Figma's smallest menu size). Option 4 becomes hard to read there.
 
+**Chosen: option 1 (Cursor).** The cover and slides use it.
+
+Fresh directions (designed from scratch, not from the original icon), compared in `exports/icons/icon-options-fresh-overview.png`:
+
+5. **Di chandrabindu**: a "Di" monogram (Desi Ipsum) whose i is dotted with a chandrabindu (ँ), on deep indigo
+6. **अa specimen**: a type-specimen tile, Devanagari अ beside a Latin italic *a*, on warm cream
+7. **Paisley bubble**: a paisley (buta) shaped as a text bubble with placeholder lines, marigold on peacock teal
+
+To re-render only the icons (cover and slides untouched): `node community-09112026/render.mjs --icons-only`.
+
 ## Re-rendering
 
 ```sh
