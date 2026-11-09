@@ -187,6 +187,17 @@ Decision: Figma quick actions (manifest `parameters`, `parameterOnly: false`), s
 - [x] Icon chosen: option 1 (Cursor). Cover and slides already use it
 - [x] Folder renamed to `community-09112026` (dated, so later redesigns can sit alongside it)
 - [ ] Upload icon, cover, slides and text to the Community page (you; unblocked: Phases 11–12 are checked in Figma)
+- [x] Bigger अ in icon option 1 (matches the cursor height, measured); alternatives 5–7 kept for reference; committed `1076504`
+
+## Phase 14: Small finishing touches (before publishing)
+
+- [x] **Remember last settings:** the amount and type are saved per user (`figma.clientStorage`) and restored when the plugin opens (`get-settings` / `settings` / `save-settings` messages); invalid saved values are ignored
+- [x] **Fill everything inside a frame:** selecting a frame, group, section or component fills every visible text layer inside it (`findAllWithCriteria({ types: ["TEXT"] })`), in layer order; duplicates removed. Also works for quick actions and Regenerate
+- [x] **No selection → new text layer:** with nothing selected, create a text layer at the centre of the view (16 px; 320 px wide auto-height for sentences/paragraphs, auto-width for words, a 320×200 fixed box for "Fill text box"), fill it and select it. Figma Design and FigJam only; Slides and Buzz keep the "Please select a text layer" message
+- [x] **Readable new layer** (your finding: black text was invisible on a dark page): the new layer gets white or black text, whichever has more contrast (WCAG luminance) with what is behind it: the topmost frame/section/component/rectangle with a solid fill at the centre of the view, otherwise the page background
+- [x] Build passes, no type errors in `src/`
+- [x] Manual check in Figma (by you): restart restores settings; frame with nested text layers; nothing selected in Design and in FigJam
+- [x] README + community description: mention filling frames and creating a layer
 
 ---
 
@@ -194,11 +205,11 @@ Decision: Figma quick actions (manifest `parameters`, `parameterOnly: false`), s
 
 - [x] Fill to fit (moved to Phase 11)
 - [x] Quick actions + Regenerate button (moved to Phase 12)
-- [ ] Remember last settings with `figma.clientStorage`
-- [ ] Select a frame to fill all text layers inside it
+- [x] Remember last settings (moved to Phase 14)
+- [x] Select a frame to fill all text layers inside it (moved to Phase 14)
 - [ ] Character-count mode for buttons and labels
 - [ ] Native numerals (०-९, ০-৯ …) option
-- [ ] No selection: create a new text node in the viewport
+- [x] No selection: create a new text node in the viewport (moved to Phase 14)
 - [ ] Show native script names on the buttons (tooltip done; visible label still open)
 - [ ] More Indian languages: Konkani, Maithili next (Urdu, Kashmiri, Sindhi skipped: right-to-left)
 - [ ] Unit test setup (e.g. vitest) for `generator.ts`

@@ -29,7 +29,9 @@ Quick actions: type "Desi Ipsum" in Figma's quick actions, pick a language and a
 Regenerate: filled layers get a "Regenerate text" button in the right panel for fresh text with the same settings
 Western classics: Lorem ipsum and Shakespeare (English placeholder text from his public-domain works)
 Light and dark: follows your Figma theme, or pick one yourself
-Keeps your style: Bold stays Bold, and layers you've named keep their names
+Fill whole frames: select a frame, card or section to fill every text layer inside it
+Nothing selected? A new text layer is created in the middle of your view
+Keeps your style: Bold stays Bold, layers you've named keep their names, and your last amount is remembered
 
 
 Features
@@ -44,7 +46,7 @@ Works across Figma Design, FigJam, Slides and Buzz
 
 How to use
 
-1. Select one or more text layers
+1. Select one or more text layers, or a whole frame (or nothing, to create a new text layer)
 2. Choose how much text, or "Fill text box"
 3. Click a language
 

@@ -2,7 +2,7 @@
 //abhijitchirde.com
 
 import { wordSpace } from "./data/wordSpace";
-import { Amount, DEFAULT_AMOUNT, LANGUAGES, LanguageConfig, describeAmount, getLanguage } from "./data/languages";
+import { Amount, DEFAULT_AMOUNT, LANGUAGES, LanguageConfig, MODES, Mode, describeAmount, getLanguage } from "./data/languages";
 import { generateText } from "./generator";
 import { fitText } from "./fill";
 import { amountSuggestions, parseAmount, validateAmount } from "./amount";
@@ -230,32 +230,131 @@ function problems(result: FillResult, skipped: number, skippedWhat: string): str
   return parts.join(" · ");
 }
 
+/**
+ * Text layers in the selection: selected text layers, plus every visible text layer inside
+ * selected frames, groups, sections, components and instances (in layer order, no duplicates).
+ * `skipped` counts selected layers that had no text at all.
+ */
 function selectedTextLayers() {
-  const selection = figma.currentPage.selection;
-  const textNodes = selection.filter((node): node is TextNode => node.type === "TEXT");
-  return { textNodes, skipped: selection.length - textNodes.length };
+  const seen = new Set<string>();
+  const textNodes: TextNode[] = [];
+  let skipped = 0;
+  for (const node of figma.currentPage.selection) {
+    let found: TextNode[] = [];
+    if (node.type === "TEXT") found = [node];
+    else if ("findAllWithCriteria" in node) {
+      found = node.findAllWithCriteria({ types: ["TEXT"] }).filter((text) => text.visible);
+    }
+    if (found.length === 0) skipped++;
+    for (const text of found) {
+      if (!seen.has(text.id)) {
+        seen.add(text.id);
+        textNodes.push(text);
+      }
+    }
+  }
+  return { textNodes, skipped };
+}
+
+const NEW_LAYER_WIDTH = 320;
+
+/** The topmost visible solid paint (paints are listed bottom to top), or null. */
+function solidColor(paints: ReadonlyArray<Paint> | PluginAPI["mixed"] | undefined): RGB | null {
+  if (!paints || paints === figma.mixed) return null;
+  for (let i = paints.length - 1; i >= 0; i--) {
+    const paint = paints[i];
+    if (paint.visible !== false && paint.type === "SOLID" && (paint.opacity ?? 1) >= 0.5) return paint.color;
+  }
+  return null;
+}
+
+const BACKDROP_TYPES = ["FRAME", "SECTION", "COMPONENT", "COMPONENT_SET", "INSTANCE", "RECTANGLE"];
+
+/**
+ * The colour behind a point on the canvas: the topmost top-level frame/section/rectangle there
+ * with a solid fill, otherwise the page background.
+ */
+function backdropAt(x: number, y: number): RGB | null {
+  const children = figma.currentPage.children;
+  for (let i = children.length - 1; i >= 0; i--) {
+    const node = children[i];
+    if (!node.visible || BACKDROP_TYPES.indexOf(node.type) === -1 || !("fills" in node)) continue;
+    const box = node.absoluteBoundingBox;
+    if (!box || x < box.x || x > box.x + box.width || y < box.y || y > box.y + box.height) continue;
+    const color = solidColor(node.fills);
+    if (color) return color;
+  }
+  return solidColor(figma.currentPage.backgrounds);
+}
+
+/** True if white text has more contrast than black on this colour (WCAG relative luminance). */
+function prefersWhiteText({ r, g, b }: RGB): boolean {
+  const lin = (c: number) => (c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+  const luminance = 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+  // Contrast with white (1.05 / (L + 0.05)) beats contrast with black ((L + 0.05) / 0.05) below L ≈ 0.179.
+  return 1.05 / (luminance + 0.05) > (luminance + 0.05) / 0.05;
+}
+
+/**
+ * With nothing selected: a new text layer at the centre of the view, sized for the amount.
+ * Only in Figma Design and FigJam (Slides and Buzz need a slide/frame to put it in).
+ */
+async function createTextLayer(amount: Amount): Promise<TextNode | null> {
+  if (figma.editorType !== "figma" && figma.editorType !== "figjam") return null;
+  const node = figma.createText();
+  await figma.loadFontAsync(node.fontName as FontName);
+  node.fontSize = 16;
+
+  // Readable on whatever is behind it: white text on dark backgrounds, black (default) on light ones.
+  const { x, y } = figma.viewport.center;
+  const backdrop = backdropAt(x, y);
+  if (backdrop && prefersWhiteText(backdrop)) {
+    node.fills = [{ type: "SOLID", color: { r: 1, g: 1, b: 1 } }];
+  }
+  if (amount.mode === "words") {
+    node.textAutoResize = "WIDTH_AND_HEIGHT";
+  } else if (amount.mode === "fill") {
+    node.textAutoResize = "NONE";
+    node.resize(NEW_LAYER_WIDTH, 200);
+  } else {
+    node.textAutoResize = "HEIGHT";
+    node.resize(NEW_LAYER_WIDTH, node.height);
+  }
+  return node;
 }
 
 /** Fills the selected text layers. Returns an error/summary message, or null if all went fine. */
 async function generateIntoSelection(lang: LanguageConfig, amount: Amount): Promise<string | null> {
+  if (figma.currentPage.selection.length === 0) {
+    const node = await createTextLayer(amount);
+    if (!node) return "Please select a text layer";
+    const result = await fillLayers([{ node, lang, amount }]);
+    // Centre it in the view now that its final size is known, and select it.
+    const { x, y } = figma.viewport.center;
+    node.x = Math.round(x - node.width / 2);
+    node.y = Math.round(y - node.height / 2);
+    figma.currentPage.selection = [node];
+    return problems(result, 0, "");
+  }
+
   const { textNodes, skipped } = selectedTextLayers();
-  if (textNodes.length === 0) return "Please select a text layer";
+  if (textNodes.length === 0) return "No text layers in the selection";
   const result = await fillLayers(textNodes.map((node) => ({ node, lang, amount })));
-  return problems(result, skipped, "non-text layer");
+  return problems(result, skipped, "layer without text");
 }
 
-/** Regenerates selected layers with the settings each one was filled with. */
+/** Regenerates selected layers (and text inside selected frames) with the settings each one was filled with. */
 async function regenerateSelection(): Promise<string> {
-  const { textNodes } = selectedTextLayers();
+  const { textNodes, skipped } = selectedTextLayers();
   const jobs: FillJob[] = [];
   for (const node of textNodes) {
     const saved = recall(node);
     if (saved) jobs.push({ node, ...saved });
   }
   if (jobs.length === 0) return "Select text layers filled by Desi Ipsum to regenerate them";
-  const skipped = figma.currentPage.selection.length - jobs.length;
+  const notOurs = skipped + (textNodes.length - jobs.length);
   const result = await fillLayers(jobs);
-  return problems(result, skipped, "layer not filled by Desi Ipsum") ?? `Regenerated ${plural(result.filled, "text layer")}`;
+  return problems(result, notOurs, "layer not filled by Desi Ipsum") ?? `Regenerated ${plural(result.filled, "text layer")}`;
 }
 
 // ---------- Quick actions (parameters) ----------
@@ -318,6 +417,14 @@ figma.on("run", async ({ command, parameters }: RunEvent) => {
 // ---------- Messages from the UI ----------
 
 const THEME_KEY = "themePreference";
+const SETTINGS_STORAGE_KEY = "lastSettings";
+
+/** The UI's inputs as saved: { num: "5", block: "sentences" }. */
+function isSavedInput(value: unknown): value is { num: string; block: string } {
+  if (!value || typeof value !== "object") return false;
+  const { num, block } = value as { num: unknown; block: unknown };
+  return typeof num === "string" && /^\d{0,4}$/.test(num) && typeof block === "string" && MODES.indexOf(block as Mode) !== -1;
+}
 
 function isThemeValue(value: unknown): value is "auto" | "light" | "dark" {
   return value === "auto" || value === "light" || value === "dark";
@@ -353,5 +460,15 @@ figma.ui.onmessage = async (msg) => {
 
   if (msg.type === "set-theme-pref" && isThemeValue(msg.value)) {
     await figma.clientStorage.setAsync(THEME_KEY, msg.value).catch(() => undefined);
+  }
+
+  // Last used amount and type (e.g. 3 paragraphs), saved per user and restored on open.
+  if (msg.type === "get-settings") {
+    const saved = await figma.clientStorage.getAsync(SETTINGS_STORAGE_KEY).catch(() => undefined);
+    if (isSavedInput(saved)) figma.ui.postMessage({ type: "settings", value: saved });
+  }
+
+  if (msg.type === "save-settings" && isSavedInput(msg.value)) {
+    await figma.clientStorage.setAsync(SETTINGS_STORAGE_KEY, msg.value).catch(() => undefined);
   }
 };

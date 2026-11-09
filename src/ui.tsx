@@ -8,6 +8,22 @@ import BottomSection from "./components/BottomSection";
 function App() {
   const [input, setInput] = React.useState<InputValues>({ num: "5", block: "sentences" });
 
+  // Restore the last used amount and type (saved per user by the plugin).
+  React.useEffect(() => {
+    const onMessage = (event: MessageEvent) => {
+      const msg = event.data?.pluginMessage;
+      if (msg?.type === "settings" && msg.value) setInput(msg.value);
+    };
+    window.addEventListener("message", onMessage);
+    parent.postMessage({ pluginMessage: { type: "get-settings" } }, "*");
+    return () => window.removeEventListener("message", onMessage);
+  }, []);
+
+  const onInputChange = (value: InputValues) => {
+    setInput(value);
+    parent.postMessage({ pluginMessage: { type: "save-settings", value } }, "*");
+  };
+
   const onGenerate = (lang: string) => {
     parent.postMessage(
       {
@@ -22,7 +38,7 @@ function App() {
 
   return (
     <main>
-      <Inputs value={input} onChange={setInput} />
+      <Inputs value={input} onChange={onInputChange} />
 
       <Buttons onClick={onGenerate} />
 

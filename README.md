@@ -18,7 +18,9 @@ Fill Text Box: Fill each text layer exactly to its size, whether it's a fixed bo
 Quick Actions: Run it from Figma's quick actions (type "Desi Ipsum", pick a language and an amount) without opening the plugin window
 Regenerate: Filled layers get a "Regenerate text" button in Figma's right panel for a fresh random fill with the same settings
 Uses proper script rendering and language-specific punctuation marks
-Select multiple text layers and fill them all at once with unique content
+Select multiple text layers and fill them all at once with unique content, or select a frame to fill every text layer inside it
+Nothing selected? A new text layer is created in the middle of your view (Figma Design and FigJam)
+Remembers your last amount and type
 Compatibility: Works across all Figma applications (Design, FigJam, Slides, Buzz)
 
 More languages coming soon!
