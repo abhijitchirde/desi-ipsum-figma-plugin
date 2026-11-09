@@ -68,6 +68,41 @@ Decision: the standard opening is "Lorem ipsum dolor sit amet, consectetur adipi
 - [x] `npm run build` passes with no type errors in `src/`
 - [x] Scratch test of the generator: punctuation per language, counts, Lorem opening, no empty output, no repeated adjacent words
 - [x] Manual check in Figma (by you): each language, mixed selection, Bold layer, dark theme, Lorem on several layers, plugin height (505px) fits without clipping
+- [x] Committed and pushed as `235a8fb`
+
+## Phase 7: Shakespeare generator
+
+Decision: one English option in the classic group, using a word bank built from well-known public-domain Shakespeare passages (Hamlet, Macbeth, As You Like It, Julius Caesar, Richard III, The Merchant of Venice, Sonnet 18). Common words are kept with their natural repeats, so the output reads like English. Only the first layer starts with a famous line, picked **at random from 15 single-sentence lines**, so generations don't all open with the overused "To be, or not to be". Lorem ipsum keeps its single standard opening, because that one is the convention.
+
+- [x] Move the classic opening line from hard-coded Lorem text into the language config (`opening`), so each classic generator has its own
+- [x] Add a `Shakespeare` word array at the end of `src/data/wordSpace.ts`
+- [x] Config entry: keeps the layer's font, capitalised sentences, `.` and `,`
+- [x] UI: "Shakespeare" button next to "Lorem ipsum" in one row; label "or the classics"
+- [x] README: mention Shakespeare
+- [x] Generator test: Shakespeare opening, and Lorem still works
+- [x] `opening` accepts a list; Shakespeare picks one of 15 famous lines at random (question lines keep their "?")
+- [x] Test: every opening gets used, single-sentence openings keep the sentence count right
+- [x] Generator strips punctuation stuck to word-bank entries (a Sanskrit entry had a trailing comma, so commas could appear despite Sanskrit having none)
+
+## Phase 8: Manual theme override
+
+Decision: one footer button that cycles **Auto → Light → Dark**. Auto follows Figma (`themeColors`). Light/Dark force our own palette. The choice is saved per user in `figma.clientStorage`.
+
+- [x] CSS: `html[data-theme="light"]` / `html[data-theme="dark"]` palettes (higher specificity than Figma's injected `:root` values); no attribute = Auto
+- [x] Plugin: `get-theme-pref` / `set-theme-pref` messages backed by `figma.clientStorage`
+- [x] UI: `useThemePreference` hook + `ThemeToggle` button (🌗 Auto, ☀️ Light, 🌙 Dark) in the footer next to the disclaimer
+- [x] Update `FIGMA_DESIGN_SYSTEM.md` theme section
+- [x] Build passes, no type errors in `src/`
+- [x] Manual check in Figma (by you): cycle all three theme modes in both Figma themes; the choice survives reopening the plugin; Shakespeare + Lorem ipsum fit on one row
+
+## Phase 9: Three-column language buttons
+
+- [x] Indian language buttons in 3 columns (11 buttons: 6 rows → 4); incomplete last row centred
+- [x] Fix: older `.buttons-div` gap overrode the grid gap, and padding/border made buttons too wide (`box-sizing: border-box`)
+- [x] Plugin size 240×505 → **272×410**: at 240px "Malayalam" was clipped (needs ~59px in Arial, more in Inter; got 57px). At 272px each button has 68px for text
+- [x] Classic buttons use the same text size as the grid
+- [x] Measured and screenshotted in headless Edge at 272×410: nothing clipped, classic buttons on one row, content fits (403px needed)
+- [x] Manual check in Figma (by you), especially with Inter installed
 
 ---
 
@@ -81,7 +116,7 @@ Decision: the standard opening is "Lorem ipsum dolor sit amet, consectetur adipi
 - [ ] Native numerals (०-९, ০-৯ …) option
 - [ ] No selection: create a new text node in the viewport
 - [ ] Show native script names on the buttons (tooltip done; visible label still open)
-- [ ] More languages: Assamese, Nepali, Konkani, Maithili, Urdu (RTL)
+- [ ] More Indian languages: shortlist under discussion (Urdu skipped)
 - [ ] Unit test setup (e.g. vitest) for `generator.ts`
 - [ ] `tsconfig`: `strict: true`, and fix the `@types/node` vs Figma typings clash (27 errors with plain `tsc`, all in node_modules; webpack build unaffected)
 - [-] Clean stray entries in the word bank (dropped: word bank stays as-is)

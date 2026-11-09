@@ -14,7 +14,7 @@ const Buttons = ({ onClick }: ButtonsProps) => {
     <>
       <div className="content-div">
         <p className="section-label">from</p>
-        <div className="buttons-div">
+        <div className="buttons-div buttons-grid">
           {desi.map((lang) => (
             <LangButton key={lang.id} lang={lang} onClick={onClick} />
           ))}
@@ -22,7 +22,7 @@ const Buttons = ({ onClick }: ButtonsProps) => {
       </div>
 
       <div className="content-div">
-        <p className="section-label">or the classic</p>
+        <p className="section-label">or the classics</p>
         <div className="buttons-div">
           {classic.map((lang) => (
             <LangButton key={lang.id} lang={lang} onClick={onClick} wide />

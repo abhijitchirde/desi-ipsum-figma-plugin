@@ -25,7 +25,31 @@ export interface LanguageConfig {
   capitalize: boolean;
   /** Which button group the language sits in. */
   group: "desi" | "classic";
+  /**
+   * Famous first line for the first filled layer (classic generators).
+   * A list means one line is picked at random each time, to avoid repetition.
+   */
+  opening?: string | string[];
 }
+
+// Famous single-sentence Shakespeare lines (public domain). One is picked at random per generation.
+const SHAKESPEARE_OPENINGS = [
+  "To be, or not to be, that is the question.",
+  "All the world's a stage, and all the men and women merely players.",
+  "Shall I compare thee to a summer's day?",
+  "Now is the winter of our discontent made glorious summer by this sun of York.",
+  "Friends, Romans, countrymen, lend me your ears.",
+  "The course of true love never did run smooth.",
+  "If music be the food of love, play on.",
+  "Some are born great, some achieve greatness, and some have greatness thrust upon 'em.",
+  "We are such stuff as dreams are made on, and our little life is rounded with a sleep.",
+  "The quality of mercy is not strain'd.",
+  "Brevity is the soul of wit.",
+  "Once more unto the breach, dear friends, once more.",
+  "Tomorrow, and tomorrow, and tomorrow, creeps in this petty pace from day to day.",
+  "Love looks not with the eyes, but with the mind.",
+  "The fault, dear Brutus, is not in our stars, but in ourselves.",
+];
 
 const regular = (family: string): FontSpec => ({ family, style: "Regular" });
 
@@ -42,7 +66,8 @@ export const LANGUAGES: LanguageConfig[] = [
   { id: "Sanskrit", label: "Sanskrit", nativeName: "संस्कृतम्", font: regular("Mukta"), fullStop: "।", finalStop: "॥", comma: null, capitalize: false, group: "desi" },
   { id: "Tamil", label: "Tamil", nativeName: "தமிழ்", font: regular("Hind Madurai"), fullStop: ".", comma: ",", capitalize: false, group: "desi" },
   { id: "Telugu", label: "Telugu", nativeName: "తెలుగు", font: regular("Hind Guntur"), fullStop: ".", comma: ",", capitalize: false, group: "desi" },
-  { id: "Lorem", label: "Lorem ipsum", nativeName: "Lorem ipsum", font: null, fullStop: ".", comma: ",", capitalize: true, group: "classic" },
+  { id: "Lorem", label: "Lorem ipsum", nativeName: "Classic Latin placeholder", font: null, fullStop: ".", comma: ",", capitalize: true, group: "classic", opening: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
+  { id: "Shakespeare", label: "Shakespeare", nativeName: "English, from public-domain Shakespeare", font: null, fullStop: ".", comma: ",", capitalize: true, group: "classic", opening: SHAKESPEARE_OPENINGS },
 ];
 
 export function getLanguage(id: string): LanguageConfig | undefined {

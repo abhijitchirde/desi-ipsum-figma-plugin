@@ -103,6 +103,7 @@ Language buttons are generated from `LANGUAGES` in `src/data/languages.ts`, in t
 - `.button-pri` - Language buttons
 - `.button-wide` - Wider variant for long labels (e.g. "Lorem ipsum")
 - `.buttons-div` - Button container
+- `.buttons-grid` - Three-column variant for the Indian language buttons (flex, so an incomplete last row stays centred). The plugin is 272px wide so the longest label ("Malayalam") fits in Inter with some slack. Recheck this if a longer language name is added
 
 ### 3. Layout Components
 
@@ -112,19 +113,29 @@ Language buttons are generated from `LANGUAGES` in `src/data/languages.ts`, in t
 
 - `.content-div` - Content containers
 - `.bottom-wrapper` - Footer container
-- `.icon-button` - Small square icon button (disclaimer)
+- `.icon-button` - Small square icon button (disclaimer, theme toggle)
 
 ## Theme System
 
-The plugin follows Figma's theme automatically. There's no manual toggle, theme hook or theme messages.
+By default the plugin follows Figma's theme. A footer button lets users override it.
 
 **Plugin Code** (`src/code.ts`):
 
 ```typescript
-figma.showUI(__html__, { width: 240, height: 505, themeColors: true });
+figma.showUI(__html__, { width: 272, height: 410, themeColors: true });
 ```
 
 When the user switches Figma between light and dark, Figma updates the injected variables live, with no plugin code involved. If a style ever needs to differ beyond colour, target `html.figma-dark` in CSS.
+
+### Manual Override (Auto → Light → Dark)
+
+**Files**: `src/components/ThemeToggle.tsx`, `src/hooks/useThemePreference.ts`
+
+- The footer button cycles 🌗 Auto (follows Figma) → ☀️ Light → 🌙 Dark.
+- Light/Dark set `data-theme` on `<html>`. `html[data-theme="light"|"dark"]` in `ui.css` defines a full palette and is more specific than Figma's injected `:root` values, so it wins. Auto removes the attribute.
+- The choice is saved per user with `figma.clientStorage` (key `themePreference`), because the UI iframe can't rely on `localStorage` inside Figma:
+  - UI → plugin `get-theme-pref` on load; plugin → UI `{ type: "theme-pref", value }`
+  - UI → plugin `set-theme-pref` with the new value on each click
 
 ## Implementation Guidelines
 
@@ -163,7 +174,10 @@ src/
 │   ├── Inputs.tsx          # Count + unit inputs
 │   ├── Buttons.tsx         # Language button groups
 │   ├── LangButton.tsx      # Single language button
+│   ├── ThemeToggle.tsx     # Auto / Light / Dark override button
 │   └── BottomSection.tsx   # Footer component
+├── hooks/
+│   └── useThemePreference.ts # Theme override state, saved via clientStorage
 ├── data/
 │   ├── languages.ts        # Language config (fonts, punctuation, groups), shared by UI + plugin
 │   └── wordSpace.ts        # Word bank per language (plugin side only)

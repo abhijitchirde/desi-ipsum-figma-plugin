@@ -7,7 +7,7 @@ export interface GenerateOptions {
   lang: LanguageConfig;
   unit: Unit;
   count: number;
-  /** Start with the classic "Lorem ipsum dolor sit amet…" line. */
+  /** Start with the language's famous opening line (`lang.opening`), if it has one. */
   classicOpening?: boolean;
   /** Injectable for tests. Defaults to Math.random. */
   random?: () => number;
@@ -17,9 +17,7 @@ const SENTENCE_WORDS = { min: 4, max: 9 };
 const PARAGRAPH_SENTENCES = { min: 4, max: 8 };
 const COMMA_CHANCE = 0.35;
 const MIN_WORDS_FOR_COMMA = 6;
-
-const CLASSIC_OPENING_WORDS = ["Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit"];
-const CLASSIC_OPENING_SENTENCE = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+const TRAILING_PUNCTUATION = /[,.;:!?।॥]+$/;
 
 export function generateText(options: GenerateOptions): string {
   const ctx = new Context(options);
@@ -37,8 +35,14 @@ class Context {
   private lastWord = "";
   private openingPending: boolean;
 
+  /** The opening line for this generation, e.g. "Lorem ipsum dolor sit amet, consectetur adipiscing elit." */
+  private readonly opening: string;
+
   constructor(private readonly opts: GenerateOptions) {
-    this.openingPending = !!opts.classicOpening;
+    const { opening } = opts.lang;
+    // A list of openings: pick one at random so generations don't all start the same way.
+    this.opening = Array.isArray(opening) ? opening[Math.floor(this.rand() * opening.length)] ?? "" : opening ?? "";
+    this.openingPending = !!opts.classicOpening && this.opening !== "";
   }
 
   private rand() {
@@ -57,7 +61,8 @@ class Context {
       pick = words[Math.floor(this.rand() * words.length)];
     }
     this.lastWord = pick;
-    return pick;
+    // Word banks may contain words with punctuation attached; punctuation is added by the generator.
+    return pick.replace(TRAILING_PUNCTUATION, "") || pick;
   }
 
   private capitalize(text: string) {
@@ -68,7 +73,8 @@ class Context {
     const out: string[] = [];
     if (this.openingPending) {
       this.openingPending = false;
-      out.push(...CLASSIC_OPENING_WORDS.slice(0, count));
+      const openingWords = this.opening.replace(/[.,;:!?]/g, "").split(/\s+/);
+      out.push(...openingWords.slice(0, count));
     }
     while (out.length < count) out.push(this.word());
     return this.capitalize(out.join(" "));
@@ -77,8 +83,8 @@ class Context {
   private sentence(stop: string): string {
     if (this.openingPending) {
       this.openingPending = false;
-      // The classic line already has its own comma and full stop.
-      return stop === "." ? CLASSIC_OPENING_SENTENCE : CLASSIC_OPENING_SENTENCE.slice(0, -1) + stop;
+      // The opening line already has its own commas and ending (".", or "?" for a question).
+      return /[.!?]$/.test(this.opening) ? this.opening : this.opening + stop;
     }
     const length = this.randInt(SENTENCE_WORDS.min, SENTENCE_WORDS.max);
     const parts: string[] = [];

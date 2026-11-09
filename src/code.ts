@@ -7,7 +7,8 @@ import { generateText } from "./generator";
 
 const words = wordSpace as Record<string, string[]>;
 
-figma.showUI(__html__, { width: 240, height: 505, themeColors: true });
+// 272px wide fits three language buttons per row (longest label "Malayalam" in Inter, with slack).
+figma.showUI(__html__, { width: 272, height: 410, themeColors: true });
 
 // ---------- Fonts ----------
 
@@ -127,8 +128,8 @@ async function handleGenerate(data: GenerateRequest) {
         lang,
         unit,
         count,
-        // Only the first filled layer gets the classic "Lorem ipsum dolor sit amet…" opening.
-        classicOpening: lang.group === "classic" && !openingUsed,
+        // Only the first filled layer gets the famous opening line (Lorem ipsum, Shakespeare).
+        classicOpening: !openingUsed,
       });
       openingUsed = true;
       maybeRename(node, lang, wasAutoNamed);
@@ -156,4 +157,20 @@ figma.ui.onmessage = async (msg) => {
   if (msg.type === "disclaimer") {
     figma.notify("This plugin generates random text without any literal meaning.", { timeout: 2000 });
   }
+
+  // Theme override (Auto / Light / Dark), saved per user.
+  if (msg.type === "get-theme-pref") {
+    const value = await figma.clientStorage.getAsync(THEME_KEY).catch(() => undefined);
+    figma.ui.postMessage({ type: "theme-pref", value: isThemeValue(value) ? value : "auto" });
+  }
+
+  if (msg.type === "set-theme-pref" && isThemeValue(msg.value)) {
+    await figma.clientStorage.setAsync(THEME_KEY, msg.value).catch(() => undefined);
+  }
 };
+
+const THEME_KEY = "themePreference";
+
+function isThemeValue(value: unknown): value is "auto" | "light" | "dark" {
+  return value === "auto" || value === "light" || value === "dark";
+}
