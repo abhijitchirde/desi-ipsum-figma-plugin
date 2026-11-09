@@ -10,5 +10,27 @@
   "networkAccess": {
     "allowedDomains": ["none"]
   },
-  "documentAccess": "dynamic-page"
+  "documentAccess": "dynamic-page",
+  "parameters": [
+    {
+      "name": "Language",
+      "key": "lang",
+      "description": "Hindi, Tamil, Lorem ipsum, Shakespeare…"
+    },
+    {
+      "name": "Amount",
+      "key": "amount",
+      "description": "e.g. 3 sentences, 10 words, fill (default: 5 sentences)",
+      "allowFreeform": true,
+      "optional": true
+    }
+  ],
+  "parameterOnly": false,
+  "relaunchButtons": [
+    {
+      "command": "regenerate",
+      "name": "Regenerate text",
+      "multipleSelection": true
+    }
+  ]
 }

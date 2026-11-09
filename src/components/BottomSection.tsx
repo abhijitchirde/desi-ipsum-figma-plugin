@@ -11,8 +11,9 @@ const BottomSection = () => {
         <button
           id="disclaimer"
           onClick={onDisclaimer}
-          className="theme-toggle"
+          className="icon-button"
           title="Disclaimer"
+          aria-label="Disclaimer"
         >
           ⚠️
         </button>
@@ -21,7 +22,7 @@ const BottomSection = () => {
 
       <div className="credit-container">
         <p className="credit-text">
-          <a href="https://abhijitchirde.com" target="_blank">
+          <a href="https://abhijitchirde.com" target="_blank" rel="noreferrer">
             by Abhijit Chirde
           </a>
         </p>

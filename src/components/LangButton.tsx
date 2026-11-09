@@ -1,18 +1,21 @@
 import * as React from "react";
+import type { LanguageConfig } from "../data/languages";
 
 interface LangProps {
-  name: string;
-  inScript: string;
-  action: any;
+  lang: LanguageConfig;
+  onClick: (langId: string) => void;
+  wide?: boolean;
 }
 
-const LangButton = ({ name, inScript, action }: LangProps) => {
+const LangButton = ({ lang, onClick, wide = false }: LangProps) => {
   return (
-    <>
-      <button className="button-pri" value={name} onClick={action}>
-        {name} {/* ({inScript}) */}
-      </button>
-    </>
+    <button
+      className={wide ? "button-pri button-wide" : "button-pri"}
+      title={lang.nativeName}
+      onClick={() => onClick(lang.id)}
+    >
+      {lang.label}
+    </button>
   );
 };
 

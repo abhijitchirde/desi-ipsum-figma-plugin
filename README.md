@@ -3,48 +3,37 @@ https://www.figma.com/community/plugin/1047585682551481419/Desi-Ipsum
 
 ---
 
-## 🎨 Generate Authentic Indian Language Placeholder Text
+Tired of using Latin "Lorem Ipsum" for designs that need to showcase Indian languages?
 
-Tired of using Latin "Lorem Ipsum" for designs that need to showcase Indian languages? **Desi Ipsum** is your solution! Generate realistic placeholder text in 11 Indian languages with proper script rendering, language-specific punctuation, and authentic character combinations. Perfect for UI mockups, presentations, and design prototypes that need to accurately represent how Indian languages look and feel in your designs.
+Desi Ipsum is your solution! Generate realistic placeholder text in 15 Indian languages with proper script rendering, language-specific punctuation, and authentic character combinations.
 
-**Works seamlessly across all Figma applications:** Figma Design, FigJam, Figma Slides, and Figma Buzz.
+Works seamlessly across all Figma applications: Figma Design, FigJam, Figma Slides, and Figma Buzz.
 
----
+## Features
 
-## ✨ Features
+15 Indian Languages Supported: Generate placeholder text in Hindi, Marathi, Sanskrit, Nepali, Tamil, Kannada, Telugu, Malayalam, Gujarati, Bangla, Assamese, Odia, Punjabi, Santali (Ol Chiki) and Manipuri (Meitei Mayek)
+Classic Lorem Ipsum and Shakespeare too: One click gives you the standard "Lorem ipsum dolor sit amet…" Latin text, or English placeholder text made from public-domain Shakespeare, opening with one of his famous lines, in your layer's own font
+Flexible Text Generation: Create words, sentences, or full paragraphs based on your needs
+Fill Text Box: Fill each text layer exactly to its size, whether it's a fixed box, auto height or a single auto-width line
+Quick Actions: Run it from Figma's quick actions (type "Desi Ipsum", pick a language and an amount) without opening the plugin window
+Regenerate: Filled layers get a "Regenerate text" button in Figma's right panel for a fresh random fill with the same settings
+Uses proper script rendering and language-specific punctuation marks
+Select multiple text layers and fill them all at once with unique content, or select a frame to fill every text layer inside it
+Nothing selected? A new text layer is created in the middle of your view (Figma Design and FigJam)
+Remembers your last amount and type
+Compatibility: Works across all Figma applications (Design, FigJam, Slides, Buzz)
 
-- **11 Indian Languages Supported:** Generate placeholder text in Hindi, Marathi, Sanskrit, Tamil, Kannada, Telugu, Malayalam, Gujarati, Bangla, Odia, and Punjabi
-- **Flexible Text Generation:** Create words, sentences, or full paragraphs based on your needs
-- **Language-Authentic Output:** Uses proper script rendering and language-specific punctuation marks
-- **Batch Processing:** Select multiple text layers and fill them all at once with unique content
-- **Universal Compatibility:** Works across all Figma applications (Design, FigJam, Slides, Buzz)
+More languages coming soon!
 
-_More languages coming soon!_
-
----
-
-## 📖 What is "Desi"?
+## What is "Desi"?
 
 "Desi" is a word derived from Sanskrit "Desa/Desam" (देश/देशम्), which means country or nation. It is commonly used to describe the people, culture, languages, and products of Indian origin.
 
----
-
-## 🚀 How to Use
-
-1. **Run the plugin** from the Figma menu or plugins panel
-2. **Select one or more text layers** on your canvas where you want to add generated text
-3. **Enter the number** and **select the type** of text block (Words, Sentences, or Paragraphs)
-4. **Click on the Language** from which you want to generate
-
----
-
-## ⚠️ Important Note
+## Important Note
 
 The generated text is randomly composed and does not convey any literal meaning. It is designed purely for visual placeholder purposes to help you design and prototype interfaces with authentic-looking Indian language text.
 
----
-
-## 🌐 Supported Languages
+## Supported Languages
 
 - Hindi (हिंदी)
 - Marathi (मराठी)
@@ -57,5 +46,13 @@ The generated text is randomly composed and does not convey any literal meaning.
 - Bangla (বাংলা)
 - Odia (ଓଡ଼ିଆ)
 - Punjabi (ਪੰਜਾਬੀ)
+- Nepali (नेपाली)
+- Assamese (অসমীয়া)
+- Santali (ᱥᱟᱱᱛᱟᱲᱤ)
+- Manipuri (ꯃꯤꯇꯩꯂꯣꯟ)
 
 _More languages will be added in future updates._
+
+## Credits
+
+Word lists for Nepali, Assamese, Santali and Manipuri were collected from their Wikipedia editions (CC BY-SA). Shakespeare text is public domain.

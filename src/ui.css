@@ -1,10 +1,17 @@
 /* Plugin body */
-:root {
-  /* Light theme variables */
+
+/*
+ * Theme colours come from Figma: showUI({ themeColors: true }) injects the real
+ * --figma-color-* variables for the user's light/dark theme on :root.
+ * The values below are only fallbacks (e.g. when opening ui.html in a browser).
+ * :where() gives them zero specificity, so Figma's injected values always win.
+ */
+:where(:root) {
   --figma-color-bg: #ffffff;
   --figma-color-bg-secondary: #f5f5f5;
   --figma-color-text: #000000;
   --figma-color-text-secondary: #333333;
+  --figma-color-text-tertiary: #666666;
   --figma-color-border: #e5e5e5;
   --figma-color-border-strong: #cccccc;
   --figma-color-icon: #333333;
@@ -12,7 +19,46 @@
   --figma-color-text-brand: #ffffff;
   --figma-color-bg-selected: #e5f3ff;
   --figma-color-text-selected: #18a0fb;
+}
 
+/*
+ * Manual theme override (footer button: Auto → Light → Dark).
+ * html[data-theme] is more specific than Figma's injected :root values, so it wins.
+ * No data-theme attribute = Auto (follow Figma).
+ */
+html[data-theme="light"] {
+  color-scheme: light;
+  --figma-color-bg: #ffffff;
+  --figma-color-bg-secondary: #f5f5f5;
+  --figma-color-text: #000000;
+  --figma-color-text-secondary: #333333;
+  --figma-color-text-tertiary: #666666;
+  --figma-color-border: #e5e5e5;
+  --figma-color-border-strong: #cccccc;
+  --figma-color-icon: #333333;
+  --figma-color-bg-brand: #18a0fb;
+  --figma-color-text-brand: #ffffff;
+  --figma-color-bg-selected: #e5f3ff;
+  --figma-color-text-selected: #18a0fb;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --figma-color-bg: #2c2c2c;
+  --figma-color-bg-secondary: #383838;
+  --figma-color-text: #ffffff;
+  --figma-color-text-secondary: #cccccc;
+  --figma-color-text-tertiary: #999999;
+  --figma-color-border: #444444;
+  --figma-color-border-strong: #555555;
+  --figma-color-icon: #cccccc;
+  --figma-color-bg-brand: #18a0fb;
+  --figma-color-text-brand: #ffffff;
+  --figma-color-bg-selected: #1a3a4a;
+  --figma-color-text-selected: #18a0fb;
+}
+
+:root {
   /* Typography */
   --figma-font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, sans-serif;
@@ -37,21 +83,6 @@
   --figma-radius-xl: 8px;
 }
 
-[data-theme="dark"] {
-  /* Dark theme variables */
-  --figma-color-bg: #2c2c2c;
-  --figma-color-bg-secondary: #383838;
-  --figma-color-text: #ffffff;
-  --figma-color-text-secondary: #cccccc;
-  --figma-color-border: #444444;
-  --figma-color-border-strong: #555555;
-  --figma-color-icon: #cccccc;
-  --figma-color-bg-brand: #18a0fb;
-  --figma-color-text-brand: #ffffff;
-  --figma-color-bg-selected: #1a3a4a;
-  --figma-color-text-selected: #18a0fb;
-}
-
 body {
   font-family: Inter, Arial, Helvetica, sans-serif;
   margin: 0;
@@ -64,45 +95,6 @@ body {
   background-color: var(--figma-color-bg);
   color: var(--figma-color-text);
   transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-/* Header styling */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem;
-  margin-bottom: 0.5rem;
-}
-
-/* Page heading */
-.heading-div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0.4rem 0;
-}
-
-.heading-text {
-  font-size: 1rem;
-  font-weight: bold;
-  color: var(--figma-color-text);
-  background: linear-gradient(
-    45deg,
-    #f87818,
-    #f26c12,
-    #eb600e,
-    #e5540c,
-    #dd480c,
-    #d63a0e
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-align: center;
-  padding: 0;
-  margin: 0;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 /* Heading styling */
@@ -153,6 +145,11 @@ body {
   border: 1px solid var(--figma-color-border);
   transition: border-color 0.2s ease, background-color 0.2s ease,
     color 0.2s ease;
+}
+
+.input-number:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .input-number:focus {
@@ -210,6 +207,32 @@ select:focus {
   color: var(--figma-color-text-selected);
 }
 
+/* Three-column layout for the Indian language buttons.
+   Flex (not grid) so an incomplete last row stays centred. */
+.buttons-div.buttons-grid {
+  column-gap: 0.4rem;
+  row-gap: 0.5rem;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+}
+
+.buttons-grid .button-pri {
+  box-sizing: border-box;
+  width: calc((100% - 0.8rem) / 3);
+  padding: 0 2px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Wider button for longer labels, e.g. "Lorem ipsum", "Shakespeare" */
+.button-wide {
+  width: auto;
+  padding: 0 0.75rem;
+  font-size: 0.75rem;
+}
+
 .buttons-div {
   display: flex;
   flex-direction: row;
@@ -220,11 +243,11 @@ select:focus {
   justify-content: center;
 }
 
-/* Theme toggle styling */
-.theme-toggle {
+/* Small square icon button (footer) */
+.icon-button {
   font-size: 0.7rem;
   font-weight: 400;
-  padding: "4px 4px";
+  padding: 4px;
   border: 1px solid var(--figma-color-border);
   background-color: var(--figma-color-bg);
   border-radius: 4px;
@@ -240,12 +263,12 @@ select:focus {
   white-space: nowrap;
 }
 
-.theme-toggle:hover {
+.icon-button:hover {
   background-color: var(--figma-color-bg-secondary);
   border-color: var(--figma-color-border-strong);
 }
 
-.theme-toggle:active {
+.icon-button:active {
   background-color: var(--figma-color-bg-selected);
   border-color: var(--figma-color-bg-brand);
 }

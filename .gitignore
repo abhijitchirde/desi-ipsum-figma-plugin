@@ -8,3 +8,6 @@ backup
 out/
 dist/
 *.js
+
+# Hand-written sources for the community page assets (not build output)
+!community-*/src/*.js
