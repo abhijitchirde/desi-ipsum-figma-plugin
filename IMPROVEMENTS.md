@@ -143,7 +143,7 @@ How the word banks were built (scratch scripts, not in the repo):
   - [x] If no font loads, show a toast naming the fonts tried, instead of failing silently
   - [x] Retested in Figma (by you): working
 - [x] Manual check in Figma (by you): the 3 Noto fonts load (Noto Sans Bengali, Noto Sans Ol Chiki, Noto Sans Meetei Mayek); if one doesn't, the layer keeps its current font
-- [ ] Native-speaker check if possible, especially Santali and Manipuri (words, ᱾ / ꯫ full stops, no commas)
+- [-] Native-speaker check (dropped: none available. Low risk: every word appears in 2+ real Wikipedia articles, ᱾ and ꯫ are the standard Unicode full stops, and the plugin's disclaimer says the text has no literal meaning)
 
 ---
 
