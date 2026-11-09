@@ -186,7 +186,7 @@ Decision: Figma quick actions (manifest `parameters`, `parameterOnly: false`), s
 - [x] `npm run community` re-renders everything (`-- --icon N` picks the icon used on the cover/slides)
 - [x] Icon chosen: option 1 (Cursor). Cover and slides already use it
 - [x] Folder renamed to `community-09112026` (dated, so later redesigns can sit alongside it)
-- [ ] Upload icon, cover, slides and text to the Community page (you; unblocked: Phases 11–12 are checked in Figma)
+- [x] Uploaded icon, cover, slides and text to the Community page and published the new version (you, 2026-11-09)
 - [x] Bigger अ in icon option 1 (matches the cursor height, measured); alternatives 5–7 kept for reference; committed `1076504`
 
 ## Phase 14: Small finishing touches (before publishing)
