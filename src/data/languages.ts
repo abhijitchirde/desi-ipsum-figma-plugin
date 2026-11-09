@@ -15,6 +15,8 @@ export interface LanguageConfig {
   nativeName: string;
   /** Font to apply. `null` keeps the layer's existing font (e.g. Latin text). */
   font: FontSpec | null;
+  /** Other families to try, in order, if `font` can't be loaded (e.g. a system font). */
+  fallbackFamilies?: string[];
   /** Ends every sentence except the last one in a block. */
   fullStop: string;
   /** Ends the last sentence of a block. Defaults to `fullStop`. */
@@ -54,16 +56,22 @@ const SHAKESPEARE_OPENINGS = [
 const regular = (family: string): FontSpec => ({ family, style: "Regular" });
 
 export const LANGUAGES: LanguageConfig[] = [
+  { id: "Assamese", label: "Assamese", nativeName: "অসমীয়া", font: regular("Noto Sans Bengali"), fullStop: "।", comma: ",", capitalize: false, group: "desi" },
   { id: "Bangla", label: "Bangla", nativeName: "বাংলা", font: regular("Hind Siliguri"), fullStop: "।", comma: ",", capitalize: false, group: "desi" },
   { id: "Gujarati", label: "Gujarati", nativeName: "ગુજરાતી", font: regular("Hind Vadodara"), fullStop: ".", comma: ",", capitalize: false, group: "desi" },
   { id: "Hindi", label: "Hindi", nativeName: "हिंदी", font: regular("Mukta"), fullStop: "।", comma: ",", capitalize: false, group: "desi" },
   { id: "Kannada", label: "Kannada", nativeName: "ಕನ್ನಡ", font: regular("Noto Sans Kannada"), fullStop: ".", comma: ",", capitalize: false, group: "desi" },
   { id: "Malayalam", label: "Malayalam", nativeName: "മലയാളം", font: regular("Noto Sans Malayalam"), fullStop: ".", comma: ",", capitalize: false, group: "desi" },
+  // Manipuri in Meitei Mayek script; ꯫ (cheikhei) is the full stop.
+  { id: "Manipuri", label: "Manipuri", nativeName: "ꯃꯤꯇꯩꯂꯣꯟ", font: regular("Noto Sans Meetei Mayek"), fallbackFamilies: ["Nirmala UI", "Nirmala Text"], fullStop: "꯫", comma: null, capitalize: false, group: "desi" },
   { id: "Marathi", label: "Marathi", nativeName: "मराठी", font: regular("Mukta"), fullStop: ".", comma: ",", capitalize: false, group: "desi" },
+  { id: "Nepali", label: "Nepali", nativeName: "नेपाली", font: regular("Mukta"), fullStop: "।", comma: ",", capitalize: false, group: "desi" },
   { id: "Odia", label: "Odia", nativeName: "ଓଡ଼ିଆ", font: regular("Baloo Bhaina 2"), fullStop: "।", comma: ",", capitalize: false, group: "desi" },
   { id: "Punjabi", label: "Punjabi", nativeName: "ਪੰਜਾਬੀ", font: regular("Mukta Mahee"), fullStop: "।", comma: ",", capitalize: false, group: "desi" },
   // Sanskrit: single danda between sentences, double danda (U+0965) to close a block.
   { id: "Sanskrit", label: "Sanskrit", nativeName: "संस्कृतम्", font: regular("Mukta"), fullStop: "।", finalStop: "॥", comma: null, capitalize: false, group: "desi" },
+  // Santali in Ol Chiki script; ᱾ (mucaad) is the full stop.
+  { id: "Santali", label: "Santali", nativeName: "ᱥᱟᱱᱛᱟᱲᱤ", font: regular("Noto Sans Ol Chiki"), fallbackFamilies: ["Nirmala UI", "Nirmala Text"], fullStop: "᱾", comma: null, capitalize: false, group: "desi" },
   { id: "Tamil", label: "Tamil", nativeName: "தமிழ்", font: regular("Hind Madurai"), fullStop: ".", comma: ",", capitalize: false, group: "desi" },
   { id: "Telugu", label: "Telugu", nativeName: "తెలుగు", font: regular("Hind Guntur"), fullStop: ".", comma: ",", capitalize: false, group: "desi" },
   { id: "Lorem", label: "Lorem ipsum", nativeName: "Classic Latin placeholder", font: null, fullStop: ".", comma: ",", capitalize: true, group: "classic", opening: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },

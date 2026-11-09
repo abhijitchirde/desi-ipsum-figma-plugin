@@ -5,13 +5,13 @@ https://www.figma.com/community/plugin/1047585682551481419/Desi-Ipsum
 
 Tired of using Latin "Lorem Ipsum" for designs that need to showcase Indian languages?
 
-Desi Ipsum is your solution! Generate realistic placeholder text in 11 Indian languages with proper script rendering, language-specific punctuation, and authentic character combinations.
+Desi Ipsum is your solution! Generate realistic placeholder text in 15 Indian languages with proper script rendering, language-specific punctuation, and authentic character combinations.
 
 Works seamlessly across all Figma applications: Figma Design, FigJam, Figma Slides, and Figma Buzz.
 
 ## Features
 
-11 Indian Languages Supported: Generate placeholder text in Hindi, Marathi, Sanskrit, Tamil, Kannada, Telugu, Malayalam, Gujarati, Bangla, Odia, and Punjabi
+15 Indian Languages Supported: Generate placeholder text in Hindi, Marathi, Sanskrit, Nepali, Tamil, Kannada, Telugu, Malayalam, Gujarati, Bangla, Assamese, Odia, Punjabi, Santali (Ol Chiki) and Manipuri (Meitei Mayek)
 Classic Lorem Ipsum and Shakespeare too: One click gives you the standard "Lorem ipsum dolor sit amet…" Latin text, or English placeholder text made from public-domain Shakespeare, opening with one of his famous lines, in your layer's own font
 Flexible Text Generation: Create words, sentences, or full paragraphs based on your needs
 Uses proper script rendering and language-specific punctuation marks
@@ -41,5 +41,13 @@ The generated text is randomly composed and does not convey any literal meaning.
 - Bangla (বাংলা)
 - Odia (ଓଡ଼ିଆ)
 - Punjabi (ਪੰਜਾਬੀ)
+- Nepali (नेपाली)
+- Assamese (অসমীয়া)
+- Santali (ᱥᱟᱱᱛᱟᱲᱤ)
+- Manipuri (ꯃꯤꯇꯩꯂꯣꯟ)
 
 _More languages will be added in future updates._
+
+## Credits
+
+Word lists for Nepali, Assamese, Santali and Manipuri were collected from their Wikipedia editions (CC BY-SA). Shakespeare text is public domain.

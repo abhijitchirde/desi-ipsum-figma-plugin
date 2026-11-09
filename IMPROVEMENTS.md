@@ -77,7 +77,7 @@ Decision: one English option in the classic group, using a word bank built from 
 - [x] Move the classic opening line from hard-coded Lorem text into the language config (`opening`), so each classic generator has its own
 - [x] Add a `Shakespeare` word array at the end of `src/data/wordSpace.ts`
 - [x] Config entry: keeps the layer's font, capitalised sentences, `.` and `,`
-- [x] UI: "Shakespeare" button next to "Lorem ipsum" in one row; label "or the classics"
+- [x] UI: "Shakespeare" button next to "Lorem ipsum" in one row; label "or western classics" (renamed from "or the classics": Sanskrit and Tamil are officially classical languages too, so plain "classics" was ambiguous)
 - [x] README: mention Shakespeare
 - [x] Generator test: Shakespeare opening, and Lorem still works
 - [x] `opening` accepts a list; Shakespeare picks one of 15 famous lines at random (question lines keep their "?")
@@ -103,6 +103,47 @@ Decision: one footer button that cycles **Auto → Light → Dark**. Auto follow
 - [x] Classic buttons use the same text size as the grid
 - [x] Measured and screenshotted in headless Edge at 272×410: nothing clipped, classic buttons on one row, content fits (403px needed)
 - [x] Manual check in Figma (by you), especially with Inter installed
+- [x] Committed and pushed as `ba876cb`
+
+## Phase 10: New languages (Nepali, Assamese, Santali, Manipuri)
+
+Decision: I collect the word banks from each language's Wikipedia (ne, as, sat, mni; CC BY-SA, credited in the README) and wire everything else.
+
+How the word banks were built (scratch scripts, not in the repo):
+
+- 100 random main-namespace articles per language, fetched as wikitext (2 API calls per language; a first parallel attempt got rate-limited, so the fetch was redone sequentially)
+- Stripped templates, refs, tables, section headings ("References"…) and category/file links
+- Kept only tokens in the language's own script (no digits, Latin or punctuation), 2–18 characters
+- Kept words that appear in **2+ different articles** (drops one-off names and junk); up to 800 unique per language
+- Common words repeated up to 4× for natural frequency, then shuffled
+
+| Language | Bank size | Unique |
+|---|---|---|
+| Nepali | 1765 | 800 |
+| Assamese | 1889 | 800 |
+| Santali | 1849 | 800 |
+| Manipuri | 1300 | 778 |
+
+| Language | Script | Font | Full stop | Comma |
+|---|---|---|---|---|
+| Nepali (नेपाली) | Devanagari | Mukta | । | , |
+| Assamese (অসমীয়া) | Bengali-Assamese | Noto Sans Bengali (covers ৰ, ৱ) | । | , |
+| Santali (ᱥᱟᱱᱛᱟᱲᱤ) | Ol Chiki | Noto Sans Ol Chiki | ᱾ | none |
+| Manipuri (ꯃꯤꯇꯩꯂꯣꯟ) | Meitei Mayek | Noto Sans Meetei Mayek | ꯫ | none |
+
+- [x] Config entries for the 4 languages (alphabetical in the grid)
+- [x] Word banks collected from Wikipedia and added at the end of `src/data/wordSpace.ts`, with a source comment on each
+- [-] Auto-hide languages without words (dropped: not needed since all 4 banks are filled)
+- [x] Plugin height adapts to the number of language rows (4 rows = 410px, +34px per extra row; now 5 rows = 444px)
+- [x] Generator tests pass for all 17 generators; sample output has no Latin/digits, right full stops (। ᱾ ꯫)
+- [x] Headless check with all 15 languages: 5 full rows, no clipped labels, content needs 437px of 444px
+- [x] README: 15 languages, list updated, Credits section (Wikipedia CC BY-SA, Shakespeare public domain)
+- [x] Issue: Santali and Manipuri text not rendering in Figma (reported by you). Both Noto fonts are on Figma's font list, so the likely cause is a failed font load that kept the old font silently
+  - [x] Fallback fonts: Noto first, then Windows' Nirmala UI / Nirmala Text (checked locally: both contain Ol Chiki and Meetei Mayek)
+  - [x] If no font loads, show a toast naming the fonts tried, instead of failing silently
+  - [x] Retested in Figma (by you): working
+- [x] Manual check in Figma (by you): the 3 Noto fonts load (Noto Sans Bengali, Noto Sans Ol Chiki, Noto Sans Meetei Mayek); if one doesn't, the layer keeps its current font
+- [ ] Native-speaker check if possible, especially Santali and Manipuri (words, ᱾ / ꯫ full stops, no commas)
 
 ---
 
@@ -116,7 +157,7 @@ Decision: one footer button that cycles **Auto → Light → Dark**. Auto follow
 - [ ] Native numerals (०-९, ০-৯ …) option
 - [ ] No selection: create a new text node in the viewport
 - [ ] Show native script names on the buttons (tooltip done; visible label still open)
-- [ ] More Indian languages: shortlist under discussion (Urdu skipped)
+- [ ] More Indian languages: Konkani, Maithili next (Urdu, Kashmiri, Sindhi skipped: right-to-left)
 - [ ] Unit test setup (e.g. vitest) for `generator.ts`
 - [ ] `tsconfig`: `strict: true`, and fix the `@types/node` vs Figma typings clash (27 errors with plain `tsc`, all in node_modules; webpack build unaffected)
 - [-] Clean stray entries in the word bank (dropped: word bank stays as-is)

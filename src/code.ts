@@ -8,7 +8,10 @@ import { generateText } from "./generator";
 const words = wordSpace as Record<string, string[]>;
 
 // 272px wide fits three language buttons per row (longest label "Malayalam" in Inter, with slack).
-figma.showUI(__html__, { width: 272, height: 410, themeColors: true });
+// Height grows with the number of language rows: 4 rows = 410px, each extra row ≈ 34px (button + row gap).
+const languageRows = Math.ceil(LANGUAGES.filter((lang) => lang.group === "desi").length / 3);
+const uiHeight = 410 + (languageRows - 4) * 34;
+figma.showUI(__html__, { width: 272, height: uiHeight, themeColors: true });
 
 // ---------- Fonts ----------
 
@@ -49,22 +52,28 @@ function currentStyle(node: TextNode): string {
 
 /**
  * Applies the language font, keeping the layer's style (e.g. Bold) when the family has it.
- * If the family can't be loaded at all, the layer keeps its current font.
+ * Tries the main family, then any fallback families. Returns false if none could be loaded,
+ * in which case the layer keeps its current font (which may not have the script's letters).
  */
-async function applyFont(node: TextNode, lang: LanguageConfig) {
-  if (lang.font) {
-    const style = currentStyle(node);
-    const candidates: FontName[] = [{ family: lang.font.family, style }];
-    if (style !== lang.font.style) candidates.push(lang.font);
-
+async function applyFont(node: TextNode, lang: LanguageConfig): Promise<boolean> {
+  if (!lang.font) {
+    await loadNodeFonts(node);
+    return true;
+  }
+  const style = currentStyle(node);
+  const families = [lang.font.family, ...(lang.fallbackFamilies ?? [])];
+  for (const family of families) {
+    const candidates: FontName[] = [{ family, style }];
+    if (style !== lang.font.style) candidates.push({ family, style: lang.font.style });
     for (const font of candidates) {
       if (await tryLoadFont(font)) {
         node.fontName = font;
-        return;
+        return true;
       }
     }
   }
   await loadNodeFonts(node);
+  return false;
 }
 
 // ---------- Layer naming ----------
@@ -113,6 +122,7 @@ async function handleGenerate(data: GenerateRequest) {
 
   let filled = 0;
   let failed = 0;
+  let fontMissing = false;
   let openingUsed = false;
 
   for (const node of textNodes) {
@@ -122,7 +132,7 @@ async function handleGenerate(data: GenerateRequest) {
         continue;
       }
       const wasAutoNamed = node.autoRename;
-      await applyFont(node, lang);
+      if (!(await applyFont(node, lang))) fontMissing = true;
       node.characters = generateText({
         words: words[lang.id],
         lang,
@@ -138,6 +148,12 @@ async function handleGenerate(data: GenerateRequest) {
       console.error("Desi Ipsum: could not fill layer", node.name, error);
       failed++;
     }
+  }
+
+  if (fontMissing && lang.font) {
+    const tried = [lang.font.family, ...(lang.fallbackFamilies ?? [])].join(", ");
+    figma.notify(`Couldn't load a ${lang.label} font (tried ${tried}). The text may not display.`, { timeout: 5000 });
+    return;
   }
 
   const skipped = selection.length - textNodes.length;

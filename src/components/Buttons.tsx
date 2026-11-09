@@ -22,7 +22,7 @@ const Buttons = ({ onClick }: ButtonsProps) => {
       </div>
 
       <div className="content-div">
-        <p className="section-label">or the classics</p>
+        <p className="section-label">or western classics</p>
         <div className="buttons-div">
           {classic.map((lang) => (
             <LangButton key={lang.id} lang={lang} onClick={onClick} wide />
